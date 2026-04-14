@@ -94,13 +94,18 @@ abstract class Kohana_Image {
 	 */
 	public function __construct($file)
 	{
+		$info = FALSE;
+
 		try
 		{
 			// Get the real path to the file
 			$file = realpath($file);
 
-			// Get the image information
-			$info = getimagesize($file);
+			if ($file !== FALSE AND is_file($file) AND is_readable($file))
+			{
+				// Suppress warning for non-image files; result checked below
+				$info = @getimagesize($file);
+			}
 		}
 		catch (Exception $e)
 		{
