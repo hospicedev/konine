@@ -150,7 +150,7 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 		$cache_mock->expects($this->exactly(2))
 			->method('get')
 			->with($this->stringContains($key))
-			->willReturn($response);
+			->willReturnOnConsecutiveCalls($response, 0);
 
 		$request->client()->cache()->cache_response($key, $request);
 

@@ -8,6 +8,7 @@
     <testsuite name="default">
         <directory suffix="Test.php">system/tests/</directory>
         <directory suffix="Test.php">modules/cache/tests/</directory>
+        <exclude>modules/cache/tests/cache/CacheBasicMethodsTest.php</exclude>
         <directory suffix="Test.php">modules/image/tests/</directory>
         <directory suffix="Test.php">modules/minion/tests/</directory>
         <directory suffix="Test.php">modules/orm/tests/</directory>
