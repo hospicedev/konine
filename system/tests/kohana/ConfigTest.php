@@ -161,7 +161,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 			->expects($this->once())
 			->method('load')
 			->with('beer')
-			->willReturn(['stout' => 'Guinness']));
+			->willReturn(['stout' => 'Guinness']);
 
 		$config->attach($reader);
 
@@ -186,7 +186,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 			->expects($this->once())
 			->method('load')
 			->with('beer')
-			->willReturn(['stout' => 'Guinness']));
+			->willReturn(['stout' => 'Guinness']);
 
 		$config->attach($reader);
 
@@ -308,13 +308,13 @@ class Kohana_ConfigTest extends Unittest_TestCase
 			->expects($this->once())
 			->method('load')
 			->with($group_name)
-			->willReturn(['foo' => 'bar', 'kohana' => 'awesome', 'life' => ['normal', 'fated']]));
+			->willReturn(['foo' => 'bar', 'kohana' => 'awesome', 'life' => ['normal', 'fated']]);
 
 		$reader2
 			->expects($this->once())
 			->method('load')
 			->with($group_name)
-			->willReturn(['kohana' => 'sweet', 'music' => 'tasteful', 'life' => ['extraordinary', 'destined']]));
+			->willReturn(['kohana' => 'sweet', 'music' => 'tasteful', 'life' => ['extraordinary', 'destined']]);
 
 		$config = new Kohana_Config;
 
@@ -351,7 +351,7 @@ class Kohana_ConfigTest extends Unittest_TestCase
 			->expects($this->once())
 			->method('load')
 			->with('something')
-			->willReturn([]));
+			->willReturn([]);
 
 		$config = new Kohana_Config;
 
@@ -380,13 +380,13 @@ class Kohana_ConfigTest extends Unittest_TestCase
 			->expects($this->once())
 			->method('load')
 			->with('something')
-			->willReturn(['pie' => 'good', 'kohana' => 'awesome']));
+			->willReturn(['pie' => 'good', 'kohana' => 'awesome']);
 
 		$reader2
 			->expects($this->once())
 			->method('load')
 			->with('something')
-			->willReturn(['kohana' => 'good']));
+			->willReturn(['kohana' => 'good']);
 
 		$writer1 = $this->createPartialMock('Kohana_Config_Writer', ['write']);
 		$writer2 = $this->createPartialMock('Kohana_Config_Writer', ['write']);

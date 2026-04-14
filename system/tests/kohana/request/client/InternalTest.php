@@ -68,23 +68,23 @@ class Kohana_Request_Client_InternalTest extends Unittest_TestCase
 
 		$request->expects($this->any())
 			->method('directory')
-			->willReturn($directory));
+			->willReturn($directory);
 
 		$request->expects($this->any())
 			->method('controller')
-			->willReturn($controller));
+			->willReturn($controller);
 
 		$request->expects($this->any())
 			->method('action')
-			->willReturn($action));
+			->willReturn($action);
 
 		$request->expects($this->any())
 			->method('uri')
-			->willReturn($uri));
+			->willReturn($uri);
 
 		$request->expects($this->any())
 			->method('execute')
-			->willReturn($this->createMock('Response')));
+			->willReturn($this->createMock('Response'));
 
 		// mock `method` method to avoid fatals in newer versions of PHPUnit
 		$request->expects($this->any())
