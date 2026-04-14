@@ -494,7 +494,12 @@ class Kohana_UTF8Test extends Unittest_TestCase
 	 */
 	public function test_str_pad_error()
 	{
-		$this->expectException('UTF8_Exception');
+		// PHP 8.3+ mb_str_pad throws ValueError; older PHP uses UTF8_Exception
+		if (function_exists('mb_str_pad')) {
+			$this->expectException(\ValueError::class);
+		} else {
+			$this->expectException('UTF8_Exception');
+		}
 		UTF8::str_pad('Cocoñùт', 10, 'š', 15,  'šCocoñùтšš');
 	}
 
