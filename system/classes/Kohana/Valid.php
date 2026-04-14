@@ -48,6 +48,11 @@ class Kohana_Valid {
 	 */
 	public static function min_length($value, $length)
 	{
+		if (!$value)
+		{
+			return FALSE;
+		}
+
 		return UTF8::strlen($value) >= $length;
 	}
 

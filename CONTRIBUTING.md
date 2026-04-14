@@ -2,23 +2,25 @@
 Clone the repo and develop on the "develop" branch for new features and version branches (eg. v3.3) for bug fixes.
 
 # Contributing to the project
-All features and bugfixes must be fully tested and must have a reference to an issue in [GitHub](https://github.com/koseven/koseven/issues), **there are absolutely no exceptions**.
+All features and bugfixes must be fully tested and must have a reference to an issue in [GitHub](https://github.com/hospicedev/konine/issues), **there are absolutely no exceptions**.
 
 It's highly recommended that you write/run unit tests during development as it can help you pick up on issues early on.  See the Unit Testing section below.
 
 ## Cloning repo
-Go to https://github.com/koseven/koseven for each repo in the top right theres a button that says Fork. Click there to clone each repo. That will copy the repos to your github user, ex: https://github.com/neo22s/koseven
 
-Clone your project in local and use devel branch
+Clone the project and use the devel branch:
 ```
-git clone git@github.com:neo22s/koseven.git
-cd koseven
+git clone git@github.com:hospicedev/konine.git
+cd konine
 git checkout devel
 ```
 
-This will clone the koseven project
+## GitHub CLI setup
 
-Ready ;)
+This repo is a fork of `koseven/koseven`. The `gh` CLI may default to the upstream repo for commands like `gh pr create`. To ensure it targets `hospicedev/konine`, run:
+```
+gh repo set-default hospicedev/konine
+```
 
 ## How to commit
 If you have made modifications to the code.
@@ -37,26 +39,26 @@ git commit -a -m 'working closed etc  #725' # this will commit and mention an is
 ```
 
 ## Pull Requests
-Now you have new code at your fork ex https://github.com/neo22s/koseven. To move them to the original https://github.com/koseven/koseven repo you need to go to https://github.com/neo22s/koseven, and click on Pull Request (next to compare). This will create a pull request to the original code and the responsible will decide to merge it or not.
+Create a pull request against the `devel` branch at https://github.com/hospicedev/konine.
 
 Notes:
 - Try to submit pull requests against devel branch for easier merging
 - Try not to pollute your pull request with unintended changes--keep them simple and small
 - Try to share which browsers your code has been tested in before submitting a pull request
 
-## Keep sync with original repo
-First time, add a remote with the upstream
+## Keep sync with upstream (koseven)
+If you need to pull in changes from the original koseven project, add it as a remote:
 ```
 git remote add upstream https://github.com/koseven/koseven.git
 ```
 
-Everytime you want to sync just
+Then sync:
 ```
 git fetch upstream
 git merge upstream/devel
 ```
 
-Remember to be at you devel branch!
+Remember to be on your devel branch!
 
 ## Bug fixing 
 Make a PR with the fix, explain as in detail as possiblle.
@@ -74,4 +76,4 @@ Koseven currently uses PHPUnit for unit testing. This is installed with composer
  * Run `php composer.phar install` from the root of this repository
  * Finally, run `vendor/bin/phpunit --bootstrap=modules/unittest/bootstrap.php modules/unittest/tests.php`
 
-This will run the unit tests for core and all the modules and tell you if anything failed. If you haven't changed anything and you get failures, please create a new issue on  and paste the output (including the error) in the issue. Please note that a few tests only pass on linux systems.
+This will run the unit tests for core and all the modules and tell you if anything failed. If you haven't changed anything and you get failures, please create a new issue on [GitHub](https://github.com/hospicedev/konine/issues) and paste the output (including the error) in the issue. Please note that a few tests only pass on linux systems.

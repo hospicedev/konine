@@ -28,6 +28,12 @@ abstract class Kohana_Kodoc_Missing {
 	{
 		if ( ! class_exists($class))
 		{
+			// Validate that $class contains only valid PHP class/namespace characters
+			if ( ! preg_match('/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff\\\\]*$/', $class))
+			{
+				return FALSE;
+			}
+
 			// Create a new missing class
 			if (FALSE === strpos($class, '\\'))
 			{
