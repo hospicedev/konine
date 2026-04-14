@@ -381,7 +381,7 @@ class Kohana_HTTP_Cache {
 			}
 			else
 			{
-				$hit_count = $this->_cache->get(HTTP_Cache::CACHE_HIT_KEY.$key);
+				$hit_count = (int) $this->_cache->get(HTTP_Cache::CACHE_HIT_KEY.$key);
 				$this->_cache->set(HTTP_Cache::CACHE_HIT_KEY.$key, ++$hit_count);
 			}
 

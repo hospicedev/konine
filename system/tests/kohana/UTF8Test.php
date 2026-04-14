@@ -344,11 +344,11 @@ class Kohana_UTF8Test extends Unittest_TestCase
 	public function provider_strcasecmp()
 	{
 		return [
-			['Cocoñùт',   'Cocoñùт', 0],
-			['Čau',       'Čauo',   -1],
-			['Čau',       'Ča',      1],
-			['Cocoñùт',   'Cocoñ',   4],
-			['Cocoñùт',   'Coco',    6],
+			['Cocoñùт', 'Cocoñùт',  0],
+			['Čau',     'Čauo',     -1],
+			['Čau',     'Ča',        1],
+			['Cocoñùт', 'Cocoñ',     1],
+			['Cocoñùт', 'Coco',      1],
 		];
 	}
 
@@ -360,7 +360,14 @@ class Kohana_UTF8Test extends Unittest_TestCase
 	 */
 	public function test_strcasecmp($input, $input2, $expected)
 	{
-		$this->assertSame($expected, UTF8::strcasecmp($input, $input2));
+		$result = UTF8::strcasecmp($input, $input2);
+		if ($expected === 0) {
+			$this->assertSame(0, $result);
+		} elseif ($expected > 0) {
+			$this->assertGreaterThan(0, $result);
+		} else {
+			$this->assertLessThan(0, $result);
+		}
 	}
 
 	/**

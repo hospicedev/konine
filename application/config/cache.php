@@ -10,6 +10,7 @@ return [
 		'cache_dir'      => APPPATH.'cache',
 		'default_expire' => 3600,
 		'ignore_on_delete' => [
+			'file_we_want_to_keep.cache',
 			'.gitignore',
 			'.git',
 			'.svn',

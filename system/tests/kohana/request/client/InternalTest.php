@@ -62,7 +62,7 @@ class Kohana_Request_Client_InternalTest extends Unittest_TestCase
 	{
 		// Mock for request object
 		$request = $this->getMockBuilder('Request')
-			->onlyMethods(['directory', 'controller', 'action', 'uri', 'method'])
+			->onlyMethods(['directory', 'controller', 'action', 'uri', 'method', 'execute'])
 			->setConstructorArgs([$uri])
 			->getMock();
 
