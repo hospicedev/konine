@@ -1,7 +1,11 @@
-# Kohana PHP Framework - core
+# Konine — PHP 8.4+ HMVC Framework (System Core)
 
-This is the core package for the [Kohana](http://kohanaframework.org/) object oriented HMVC framework built using PHP5.
-It aims to be swift, secure, and small.
+This is the system core for [Konine](https://konine.dev/), a PHP 8.4+ HMVC framework and the successor to Koseven and Kohana.
 
-Released under a [BSD license](http://kohanaframework.org/license), Kohana can be used legally for any open source,
-commercial, or personal project.
+Konine is in **maintenance mode** — security fixes and PHP compatibility updates only. No new features.
+
+Released under the [BSD-3-Clause license](https://konine.dev/license).
+
+---
+
+> **Starting a new project?** Consider [CodeIgniter](https://codeigniter.com/) — an actively maintained lightweight PHP HMVC framework in the same tradition, far better suited to new development than Konine.

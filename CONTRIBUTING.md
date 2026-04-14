@@ -1,79 +1,98 @@
-# Developing locally
-Clone the repo and develop on the "develop" branch for new features and version branches (eg. v3.3) for bug fixes.
+# Contributing to Konine
 
-# Contributing to the project
-All features and bugfixes must be fully tested and must have a reference to an issue in [GitHub](https://github.com/hospicedev/konine/issues), **there are absolutely no exceptions**.
+Konine is in **maintenance mode** — contributions are accepted for:
+- Security vulnerabilities
+- PHP version compatibility bugs (deprecated or removed functionality)
+- Regressions in existing functionality
 
-It's highly recommended that you write/run unit tests during development as it can help you pick up on issues early on.  See the Unit Testing section below.
+**New features and refactors are out of scope.** Please open an issue before submitting a pull request so the scope can be confirmed.
 
-## Cloning repo
+---
 
-Clone the project and use the devel branch:
-```
+## Cloning the Repo
+
+```bash
 git clone git@github.com:hospicedev/konine.git
 cd konine
-git checkout devel
 ```
 
-## GitHub CLI setup
+The default branch is `master`. All fixes branch from `master` and merge back via PR.
 
-This repo is a fork of `koseven/koseven`. The `gh` CLI may default to the upstream repo for commands like `gh pr create`. To ensure it targets `hospicedev/konine`, run:
-```
+## GitHub CLI Setup
+
+This repo is a fork of `koseven/koseven`. The `gh` CLI may default to the upstream repo. To ensure it targets `hospicedev/konine`:
+
+```bash
 gh repo set-default hospicedev/konine
 ```
 
-## How to commit
-If you have made modifications to the code.
+## Making Changes
 
-```
-git status # to see what's going on
-git commit -a -m 'message here, this will commit the changes on the tracked files'
-git push origin devel # will "upload" the changes to your repo
-```
+```bash
+git checkout -b fix/description-of-fix
+# ... make your changes ...
+git status
+git add path/to/changed/file.php
+git commit -m 'fix: description of fix
 
-Tricks
-```
-git add . # will add all the files, even new ones
-git add -u # will add all the tracked files even the deleted ones
-git commit -a -m 'working closed etc  #725' # this will commit and mention an issue in the repo
+Refs #<issue-number>'
+git push origin fix/description-of-fix
 ```
 
-## Pull Requests
-Create a pull request against the `devel` branch at https://github.com/hospicedev/konine.
+Then open a pull request against `master` at https://github.com/hospicedev/konine.
 
-Notes:
-- Try to submit pull requests against devel branch for easier merging
-- Try not to pollute your pull request with unintended changes--keep them simple and small
-- Try to share which browsers your code has been tested in before submitting a pull request
+## Pull Request Rules
 
-## Keep sync with upstream (koseven)
-If you need to pull in changes from the original koseven project, add it as a remote:
+- All PRs must reference a GitHub issue (e.g. `Refs #12`)
+- Keep PRs focused — one concern per PR
+- All changes must be tested via the unit test suite
+- Fix the issue, not surrounding style
+
+## Bug Fixes
+
+Open an issue first with as much detail as possible. Then submit a PR referencing that issue.
+
+## Tagging Releases
+
+Tag names are prefixed with `v` (e.g. `v3.4.1`).
+
+---
+
+## Unit Testing
+
+Konine uses PHPUnit for unit testing, installed via Composer.
+
+### Running Tests
+
+```bash
+# Install dependencies
+composer install
+
+# Run the full test suite
+vendor/bin/phpunit
+
+# Run tests with coverage report
+vendor/bin/phpunit --coverage-html build/logs/
+
+# Run a specific module's tests
+vendor/bin/phpunit --bootstrap=modules/unittest/bootstrap.php modules/unittest/tests.php
 ```
+
+If you see failures on an unmodified checkout, please open a [GitHub issue](https://github.com/hospicedev/konine/issues) with the full output.
+
+Note: a few tests only pass on Linux systems.
+
+---
+
+## Upstream Reference
+
+The upstream `koseven/koseven` repository is archived. It is available as a reference remote but will not receive updates:
+
+```bash
 git remote add upstream https://github.com/koseven/koseven.git
-```
-
-Then sync:
-```
 git fetch upstream
-git merge upstream/devel
 ```
 
-Remember to be on your devel branch!
+---
 
-## Bug fixing 
-Make a PR with the fix, explain as in detail as possiblle.
-
-## Tagging releases
-Tag names should be prefixed with a `v`, this helps to separate tag references from branch references in Git.
-
-For example, if you were creating a tag for the `3.1.0` release the tag name would be `v3.1.0`
-
-# Unit Testing
-Koseven currently uses PHPUnit for unit testing. This is installed with composer.
-
-## How to run the tests
- * Install [Composer](http://getcomposer.org)
- * Run `php composer.phar install` from the root of this repository
- * Finally, run `vendor/bin/phpunit --bootstrap=modules/unittest/bootstrap.php modules/unittest/tests.php`
-
-This will run the unit tests for core and all the modules and tell you if anything failed. If you haven't changed anything and you get failures, please create a new issue on [GitHub](https://github.com/hospicedev/konine/issues) and paste the output (including the error) in the issue. Please note that a few tests only pass on linux systems.
+> **Not sure if your change is in scope?** Open an issue and ask. We would rather discuss it first than reject a PR after effort has been spent.
