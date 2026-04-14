@@ -64,24 +64,24 @@ class Kohana_Encrypt {
 	}
 
 	/**
-	 * Creates a new mcrypt wrapper.
+	 * Creates a new Encrypt wrapper.
 	 *
-	 * @param   string  $key_config    encryption key or config array
-	 * @param   string  $mode          encryption mode
-	 * @param   string  $cipher        encryption cipher
+	 * @param   string|array  $key_config    encryption key or config array
+	 * @param   string        $mode          encryption mode (legacy, ignored)
+	 * @param   string        $cipher        encryption cipher (legacy, ignored)
 	 */
 	public function __construct($key_config, $mode = NULL, $cipher = NULL)
 	{
 		if (is_string($key_config))
 		{
-			$this->_engine = new Encrypt_Engine_Mcrypt($key_config, $mode, $cipher);
+			$this->_engine = new Encrypt_Engine_Openssl(['key' => $key_config]);
 		}
-		
+
 		else
 		{
 			if ( ! isset($key_config['type']))
 			{
-				$key_config['type'] = 'mcrypt';
+				$key_config['type'] = 'openssl';
 			}
 
 			// Set the engine class name
@@ -127,7 +127,7 @@ class Kohana_Encrypt {
 	}
 
 	/**
-	 * Proxy for the mcrypt_create_iv function - to allow mocking and testing against KAT vectors
+	 * Proxy for the engine create_iv function - to allow mocking and testing against KAT vectors
 	 *
 	 * @return string the initialization vector or FALSE on error
 	 */
