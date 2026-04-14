@@ -66,6 +66,16 @@ class Kohana_Request_Client_Curl extends Request_Client_External {
 		// Apply any additional options set to
 		$options += $this->_options;
 
+		// Validate all option keys are integer CURLOPT_* constants
+		foreach ($options as $key => $value)
+		{
+			if ( ! is_int($key))
+			{
+				throw new Request_Exception('Invalid CURL option key: :key — keys must be CURLOPT_* integer constants',
+					[':key' => $key]);
+			}
+		}
+
 		$uri = $request->uri();
 
 		if ($query = $request->query())

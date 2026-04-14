@@ -74,6 +74,12 @@ class Kohana_Request_Client_Stream extends Request_Client_External {
 
 		$stream = fopen($uri, $mode, FALSE, $context);
 
+		if ( ! is_resource($stream))
+		{
+			throw new Request_Exception('Error fetching remote :url: could not open stream',
+				[':url' => $uri]);
+		}
+
 		$meta_data = stream_get_meta_data($stream);
 
 		// Get the HTTP response code
