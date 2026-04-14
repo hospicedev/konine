@@ -108,6 +108,7 @@ class Kohana_Response implements HTTP_Response {
 		503 => 'Service Unavailable',
 		504 => 'Gateway Timeout',
 		505 => 'HTTP Version Not Supported',
+		506 => 'Variant Also Negotiates',
 		507 => 'Insufficient Storage',
 		508 => 'Loop Detected',
 		509 => 'Bandwidth Limit Exceeded',
