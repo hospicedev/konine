@@ -1,3 +1,5 @@
+[![Konine Logo](docs/konine.png)](https://konine.dev)
+
 # Konine — PHP 8.4+ HMVC Framework
 
 **Successor to Koseven · Successor to Kohana · Built on the CodeIgniter lineage**
