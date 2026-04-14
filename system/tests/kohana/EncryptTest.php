@@ -1,5 +1,14 @@
 <?php
 
+// Mcrypt was removed in PHP 7.2. Define stub constants so data providers can
+// be parsed without crashing; setUp() will markTestSkipped when mcrypt is absent.
+if (!defined('MCRYPT_MODE_CBC'))    define('MCRYPT_MODE_CBC',    'cbc');
+if (!defined('MCRYPT_MODE_NOFB'))   define('MCRYPT_MODE_NOFB',   'nofb');
+if (!defined('MCRYPT_MODE_ECB'))    define('MCRYPT_MODE_ECB',    'ecb');
+if (!defined('MCRYPT_RIJNDAEL_128')) define('MCRYPT_RIJNDAEL_128', 'rijndael-128');
+if (!defined('MCRYPT_BLOWFISH'))    define('MCRYPT_BLOWFISH',    'blowfish');
+if (!defined('MCRYPT_3DES'))        define('MCRYPT_3DES',        '3des');
+
 /**
  * Tests the encrypt class
  *

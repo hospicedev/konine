@@ -233,6 +233,7 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 
 	/**
 	 * PHPUnit 10 compatibility: assertAttributeContains was removed.
+	 * Handles both array/Traversable and string haystacks.
 	 */
 	public static function assertAttributeContains($needle, string $attribute, object $object, string $message = ''): void
 	{
@@ -242,11 +243,17 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 		}
 		$prop = $reflection->getProperty($attribute);
 		$prop->setAccessible(true);
-		static::assertContains($needle, $prop->getValue($object), $message);
+		$value = $prop->getValue($object);
+		if (is_string($value)) {
+			static::assertStringContainsString((string) $needle, $value, $message);
+		} else {
+			static::assertContains($needle, $value, $message);
+		}
 	}
 
 	/**
 	 * PHPUnit 10 compatibility: assertAttributeNotContains was removed.
+	 * Handles both array/Traversable and string haystacks.
 	 */
 	public static function assertAttributeNotContains($needle, string $attribute, object $object, string $message = ''): void
 	{
@@ -256,21 +263,29 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 		}
 		$prop = $reflection->getProperty($attribute);
 		$prop->setAccessible(true);
-		static::assertNotContains($needle, $prop->getValue($object), $message);
+		$value = $prop->getValue($object);
+		if (is_string($value)) {
+			static::assertStringNotContainsString((string) $needle, $value, $message);
+		} else {
+			static::assertNotContains($needle, $value, $message);
+		}
 	}
 
 	/**
 	 * PHPUnit 10 compatibility: readAttribute() was removed.
+	 * Handles class name strings for static properties (pass null to getValue).
 	 */
 	public static function readAttribute($object, string $attribute)
 	{
-		$reflection = new ReflectionClass($object);
+		$className = is_string($object) ? $object : get_class($object);
+		$reflection = new ReflectionClass($className);
 		while (!$reflection->hasProperty($attribute) && $reflection->getParentClass()) {
 			$reflection = $reflection->getParentClass();
 		}
 		$prop = $reflection->getProperty($attribute);
 		$prop->setAccessible(true);
-		return $prop->getValue($object);
+		// Static properties require null; instance properties need the object
+		return $prop->isStatic() ? $prop->getValue(null) : $prop->getValue($object);
 	}
 
 	/**
