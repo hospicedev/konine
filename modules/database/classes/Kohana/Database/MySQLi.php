@@ -222,6 +222,7 @@ class Kohana_Database_MySQLi extends Database {
 			'integer unsigned'          => ['type' => 'int', 'min' => '0', 'max' => '4294967295'],
 			'longblob'                  => ['type' => 'string', 'binary' => TRUE, 'character_maximum_length' => '4294967295'],
 			'longtext'                  => ['type' => 'string', 'character_maximum_length' => '4294967295'],
+			'json'                      => ['type' => 'string', 'character_maximum_length' => '4294967295'],
 			'mediumblob'                => ['type' => 'string', 'binary' => TRUE, 'character_maximum_length' => '16777215'],
 			'mediumint'                 => ['type' => 'int', 'min' => '-8388608', 'max' => '8388607'],
 			'mediumint unsigned'        => ['type' => 'int', 'min' => '0', 'max' => '16777215'],
@@ -375,6 +376,7 @@ class Kohana_Database_MySQLi extends Database {
 						case 'char':
 						case 'varchar':
 							$column['character_maximum_length'] = $length;
+						case 'json':
 						case 'text':
 						case 'tinytext':
 						case 'mediumtext':
