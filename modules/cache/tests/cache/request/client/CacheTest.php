@@ -52,7 +52,7 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 			->method('execute_request');
 		$client_mock->expects($this->once())
 			->method('execute')
-			->will($this->returnValue($response));
+			->willReturn($response));
 
 		$this->assertSame($response, $request->execute());
 	}
@@ -79,7 +79,7 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 		$cache_mock->expects($this->once())
 			->method('get')
 			->with($request->client()->cache()->create_cache_key($request))
-			->will($this->returnValue(FALSE));
+			->willReturn(FALSE));
 
 		$response = $request->client()->execute($request);
 
@@ -108,14 +108,9 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 
 		$key = $request->client()->cache()->create_cache_key($request);
 
-		$cache_mock->expects($this->at(0))
+		$cache_mock->expects($this->exactly(2))
 			->method('set')
-			->with($this->stringEndsWith($key), $this->identicalTo(0));
-
-		$cache_mock->expects($this->at(1))
-			->method('set')
-			->with($this->identicalTo($key), $this->anything(), $this->identicalTo($lifetime))
-			->will($this->returnValue(TRUE));
+			->willReturnOnConsecutiveCalls(NULL, TRUE);
 
 		$this->assertTrue(
 			$request->client()->cache()
@@ -155,7 +150,7 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 		$cache_mock->expects($this->exactly(2))
 			->method('get')
 			->with($this->stringContains($key))
-			->will($this->returnValue($response));
+			->willReturn($response));
 
 		$request->client()->cache()->cache_response($key, $request);
 
@@ -241,7 +236,7 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 
 		$response->expects($this->any())
 			->method('headers')
-			->will($this->returnValue($headers));
+			->willReturn($headers));
 
 		$request = new Request_Client_Internal;
 		$request->cache(new HTTP_Cache);

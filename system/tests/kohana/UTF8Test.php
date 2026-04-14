@@ -484,10 +484,10 @@ class Kohana_UTF8Test extends Unittest_TestCase
 	 * Tests UTF8::str_pad error
 	 *
 	 * @test
-	 * @expectedException UTF8_Exception
 	 */
 	public function test_str_pad_error()
 	{
+		$this->expectException('UTF8_Exception');
 		UTF8::str_pad('Cocoñùт', 10, 'š', 15,  'šCocoñùтšš');
 	}
 

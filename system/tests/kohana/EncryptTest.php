@@ -527,11 +527,11 @@ class Kohana_EncryptTest extends Unittest_TestCase
 	}
 
 	/**
-	 * @expectedException Kohana_Exception
-	 * @expectedExceptionMessage No encryption key is defined in the encryption configuration group
 	 */
 	public function test_instance_throw_exception_when_no_key_provided()
 	{
+		$this->expectException('Kohana_Exception');
+		$this->expectExceptionMessage('No encryption key is defined in the encryption configuration group');
 		Encrypt::instance();
 	}
 

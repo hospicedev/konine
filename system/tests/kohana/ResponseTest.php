@@ -25,7 +25,7 @@ class Kohana_ResponseTest extends Unittest_TestCase
 		$view = $this->createMock('View');
 		$view->expects($this->any())
 			->method('__toString')
-			->will($this->returnValue('foo'));
+			->willReturn('foo');
 
 		return [
 			['unit test', 'unit test'],

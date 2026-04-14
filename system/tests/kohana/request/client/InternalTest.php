@@ -61,32 +61,34 @@ class Kohana_Request_Client_InternalTest extends Unittest_TestCase
 	public function test_response_failure_status($directory, $controller, $action, $uri, $expected)
 	{
 		// Mock for request object
-		$request = $this->createMock('Request', ['directory', 'controller', 'action', 'uri', 'response', 'method'], [$uri]);
+		$request = $this->getMockBuilder('Request')
+			->onlyMethods(['directory', 'controller', 'action', 'uri', 'response', 'method'])
+			->setConstructorArgs([$uri])
+			->getMock();
 
 		$request->expects($this->any())
 			->method('directory')
-			->will($this->returnValue($directory));
+			->willReturn($directory));
 
 		$request->expects($this->any())
 			->method('controller')
-			->will($this->returnValue($controller));
+			->willReturn($controller));
 
 		$request->expects($this->any())
 			->method('action')
-			->will($this->returnValue($action));
+			->willReturn($action));
 
 		$request->expects($this->any())
 			->method('uri')
-			->will($this->returnValue($uri));
+			->willReturn($uri));
 
 		$request->expects($this->any())
 			->method('execute')
-			->will($this->returnValue($this->createMock('Response')));
+			->willReturn($this->createMock('Response')));
 
 		// mock `method` method to avoid fatals in newer versions of PHPUnit
 		$request->expects($this->any())
-			->method('method')
-			->withAnyParameters();
+			->method('method');
 
 		$internal_client = new Request_Client_Internal;
 

@@ -1,6 +1,5 @@
 <?php
 
-use PHPUnit\Framework\SelfDescribing;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  * @copyright  (c) 2016-2018 Koseven Team
  * @license    https://koseven.ga/LICENSE.md
  */
-abstract class Kohana_Unittest_TestCase extends TestCase  implements SelfDescribing, Test {
+abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 	
 	/**
 	 * Make sure PHPUnit backs up globals
@@ -179,9 +178,111 @@ abstract class Kohana_Unittest_TestCase extends TestCase  implements SelfDescrib
 	 */
 	protected static function tag_match($matcher, $actual, $message = '', $isHtml = true)
 	{
-		$dom = PHPUnit\Util\Xml::load($actual, $isHtml);
-        $tags = $dom->getElementsByTagName($matcher['tag']);
-        
+		$dom = new DOMDocument;
+		if ($isHtml) {
+			@$dom->loadHTML($actual);
+		} else {
+			@$dom->loadXML($actual);
+		}
+		$tags = $dom->getElementsByTagName($matcher['tag']);
 		return count($tags) > 0 && $tags[0] instanceof DOMNode;
+	}
+
+	/**
+	 * Helper: read a (possibly protected/private) property from an object using reflection.
+	 */
+	protected function getObjectProperty(object $object, string $property)
+	{
+		$reflection = new ReflectionClass($object);
+		// Walk up the class hierarchy to find the property
+		while (!$reflection->hasProperty($property) && $reflection->getParentClass()) {
+			$reflection = $reflection->getParentClass();
+		}
+		$prop = $reflection->getProperty($property);
+		$prop->setAccessible(true);
+		return $prop->getValue($object);
+	}
+
+	/**
+	 * PHPUnit 10 compatibility: assertAttributeSame was removed.
+	 */
+	public static function assertAttributeSame($expected, string $attribute, object $object, string $message = ''): void
+	{
+		$reflection = new ReflectionClass($object);
+		while (!$reflection->hasProperty($attribute) && $reflection->getParentClass()) {
+			$reflection = $reflection->getParentClass();
+		}
+		$prop = $reflection->getProperty($attribute);
+		$prop->setAccessible(true);
+		static::assertSame($expected, $prop->getValue($object), $message);
+	}
+
+	/**
+	 * PHPUnit 10 compatibility: assertAttributeNotSame was removed.
+	 */
+	public static function assertAttributeNotSame($expected, string $attribute, object $object, string $message = ''): void
+	{
+		$reflection = new ReflectionClass($object);
+		while (!$reflection->hasProperty($attribute) && $reflection->getParentClass()) {
+			$reflection = $reflection->getParentClass();
+		}
+		$prop = $reflection->getProperty($attribute);
+		$prop->setAccessible(true);
+		static::assertNotSame($expected, $prop->getValue($object), $message);
+	}
+
+	/**
+	 * PHPUnit 10 compatibility: assertAttributeContains was removed.
+	 */
+	public static function assertAttributeContains($needle, string $attribute, object $object, string $message = ''): void
+	{
+		$reflection = new ReflectionClass($object);
+		while (!$reflection->hasProperty($attribute) && $reflection->getParentClass()) {
+			$reflection = $reflection->getParentClass();
+		}
+		$prop = $reflection->getProperty($attribute);
+		$prop->setAccessible(true);
+		static::assertContains($needle, $prop->getValue($object), $message);
+	}
+
+	/**
+	 * PHPUnit 10 compatibility: assertAttributeNotContains was removed.
+	 */
+	public static function assertAttributeNotContains($needle, string $attribute, object $object, string $message = ''): void
+	{
+		$reflection = new ReflectionClass($object);
+		while (!$reflection->hasProperty($attribute) && $reflection->getParentClass()) {
+			$reflection = $reflection->getParentClass();
+		}
+		$prop = $reflection->getProperty($attribute);
+		$prop->setAccessible(true);
+		static::assertNotContains($needle, $prop->getValue($object), $message);
+	}
+
+	/**
+	 * PHPUnit 10 compatibility: readAttribute() was removed.
+	 */
+	public static function readAttribute($object, string $attribute)
+	{
+		$reflection = new ReflectionClass($object);
+		while (!$reflection->hasProperty($attribute) && $reflection->getParentClass()) {
+			$reflection = $reflection->getParentClass();
+		}
+		$prop = $reflection->getProperty($attribute);
+		$prop->setAccessible(true);
+		return $prop->getValue($object);
+	}
+
+	/**
+	 * PHPUnit 10 compatibility: assertInternalType() was removed.
+	 */
+	public static function assertInternalType(string $type, $actual, string $message = ''): void
+	{
+		$method = 'assertIs' . ucfirst($type);
+		if (method_exists(static::class, $method)) {
+			static::$method($actual, $message);
+		} else {
+			static::assertThat($actual, new \PHPUnit\Framework\Constraint\IsType($type), $message);
+		}
 	}
 }
