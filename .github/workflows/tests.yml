@@ -21,6 +21,9 @@ jobs:
 
     name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
