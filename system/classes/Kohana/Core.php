@@ -16,8 +16,8 @@
 class Kohana_Core {
 
 	// Release version and codename
-	const VERSION  = '3.3.9';
-	const CODENAME = 'karlsruhe';
+	const VERSION  = '3.4.0';
+	const CODENAME = 'PHP84X';
 
 	// Common environment type constants for consistency and convenience
 	const PRODUCTION  = 10;
