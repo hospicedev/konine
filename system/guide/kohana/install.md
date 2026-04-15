@@ -2,7 +2,7 @@
 
 [!!] Before continuing, make sure you have a web server (like Apache) configured with the following requirements.
 
- - PHP 8.1 or newer.
+ - PHP 8.4 or newer.
  - [PHP Short open tag Enabled](http://php.net/manual/en/ini.core.php#ini.short-open-tag)
  - [Iconv Extension](http://php.net/iconv)
  - [Character Type (CTYPE) Extension](http://php.net/ctype)

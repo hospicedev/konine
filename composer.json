@@ -32,7 +32,7 @@
     "issues": "https://github.com/hospicedev/konine/issues"
   },
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.4",
     "ext-mbstring": "*"
   },
   "require-dev": {

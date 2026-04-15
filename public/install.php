@@ -134,12 +134,12 @@
             <tbody>
                 <tr>
                     <th>PHP Version</th>
-                    <?php if (version_compare(PHP_VERSION, '7', '>=')): ?>
+                    <?php if (version_compare(PHP_VERSION, '8.4', '>=')): ?>
                     <td class="pass">
                         <?php echo PHP_VERSION ?>
                     </td>
                     <?php else: $failed = TRUE ?>
-                    <td class="fail">Konine requires PHP 8.1 or newer, this version is
+                    <td class="fail">Konine requires PHP 8.4 or newer, this version is
                         <?php echo PHP_VERSION ?>.</td>
                     <?php endif ?>
                 </tr>
