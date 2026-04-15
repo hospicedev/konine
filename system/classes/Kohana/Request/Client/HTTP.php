@@ -13,7 +13,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @uses       [PECL HTTP](http://php.net/manual/en/book.http.php)
  */
 class Kohana_Request_Client_HTTP extends Request_Client_External {

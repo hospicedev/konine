@@ -6,7 +6,7 @@
  * @category   Logging
  * @author     Jeremy Bush
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Log_Syslog extends Log_Writer {
 

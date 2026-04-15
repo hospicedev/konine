@@ -6,7 +6,7 @@
  * @category   Query/Result
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Database_Result_Cached extends Database_Result {
 

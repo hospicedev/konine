@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title><?php echo $title ?> | Koseven <?php echo 'User Guide'; ?></title>
+<title><?php echo $title ?> | Konine <?php echo 'User Guide'; ?></title>
 
 <?php foreach ($styles as $style => $media) echo HTML::style($style, ['media' => $media], NULL, TRUE), "\n" ?>
 
@@ -14,7 +14,7 @@
 
 	<div id="kodoc-header">
 		<div class="container">
-			<a id="kodoc-logo" href="https://koseven.ga/">koseven</a>
+			<a id="kodoc-logo" href="https://konine.dev/">Konine</a>
 			<div id="kodoc-menu">
 				<ul>
 					<li class="guide first">
@@ -82,7 +82,7 @@
 			<?php endif ?>
 			</div>
 			<div class="span-12 last right">
-			<p>Powered by <?php echo HTML::anchor('https://koseven.ga/', 'Koseven') ?> v<?php echo Kohana::VERSION ?></p>
+			<p>Powered by <?php echo HTML::anchor('https://konine.dev/', 'Konine') ?> v<?php echo Kohana::VERSION ?></p>
 			</div>
 		</div>
 	</div>

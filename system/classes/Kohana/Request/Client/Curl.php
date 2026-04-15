@@ -7,7 +7,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @uses       [PHP cURL](http://php.net/manual/en/book.curl.php)
  */
 class Kohana_Request_Client_Curl extends Request_Client_External {

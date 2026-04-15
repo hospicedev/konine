@@ -4,8 +4,8 @@
  * @package    Kohana/Minion
  * @author     Kohana Team
  * @copyright  (c) 2015 Kohana Team
- * @copyright  (c) 2016-2018 Koseven Team
- * @license    https://koseven.ga/LICENSE.md
+ * @copyright  (c) 2016-2018 Koseven Team, 2026 Konine Team
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Minion_CLI {
 

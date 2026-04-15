@@ -9,7 +9,7 @@
  * @author     Kohana Team
  * @since      3.1.0
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 interface Kohana_HTTP_Response extends HTTP_Message {
 

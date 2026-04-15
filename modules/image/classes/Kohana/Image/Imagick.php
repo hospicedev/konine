@@ -6,7 +6,7 @@
  * @category   Drivers
  * @author     Tamas Mihalik tamas.mihalik@gmail.com
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Image_Imagick extends Image {
 

@@ -8,7 +8,7 @@
  * @package Kohana
  * @author  Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 interface Kohana_Config_Writer extends Kohana_Config_Source
 {

@@ -12,7 +12,7 @@
  * @author     Kohana Team
  * @author     Matt Button <matthew@sigswitch.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_LogTest extends Unittest_TestCase
 {

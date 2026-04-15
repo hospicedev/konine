@@ -8,7 +8,7 @@
  * @author     BRMatt <matthew@sigswitch.com>
  * @author	   Paul Banks
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Unittest_Tests {
 	static protected $cache = [];

@@ -7,7 +7,7 @@
  * @category   Configuration
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 interface Kohana_Config_Reader extends Kohana_Config_Source
 {

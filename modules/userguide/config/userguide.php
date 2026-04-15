@@ -27,7 +27,7 @@ return [
 			'description' => 'Documentation viewer and api generation.',
 
 			// Copyright message, shown in the footer for this module
-			'copyright' => '&copy; 2008–2014 Kohana Team',
+			'copyright' => '&copy; 2008–2014 Kohana/Koseven Team, 2026 Konine Team',
 		]
 	],
 

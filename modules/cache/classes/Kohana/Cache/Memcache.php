@@ -78,7 +78,7 @@
  * @version    2.0
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Cache_Memcache extends Cache implements Cache_Arithmetic {
 

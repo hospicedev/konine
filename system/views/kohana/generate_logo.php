@@ -9,6 +9,6 @@ file_put_contents('logo.php', "<?php
  * Kohana Logo, base64_encoded PNG
  * 
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 return array('mime' => 'image/png', 'data' => '{$data}'); ?>");

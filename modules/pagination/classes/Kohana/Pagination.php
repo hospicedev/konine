@@ -3,11 +3,11 @@
 /**
  * Pagination links generator.
  *
- * @package    Koseven/Pagination
+ * @package    Konine/Pagination
  * @category   Base
  * @author     Koseven Team
- * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @copyright  (c) Kohana Team, Koseven Team, 2026 Konine Team
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Pagination {
 

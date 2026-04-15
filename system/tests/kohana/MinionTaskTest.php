@@ -7,12 +7,12 @@
  * @group kohana.core
  * @group kohana.core.config
  *
- * @package    Koseven
+ * @package    Konine
  * @category   Tests
  * @author     Koseven Team
  * @author     Piotr Gołasz <pgolasz@gmail.com>
- * @copyright  (c) Koseven Team
- * @license    https://koseven.ga/LICENSE.md
+ * @copyright  (c) Kohana Team, Koseven Team, Konine Team
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class MinionTaskTest extends Unittest_TestCase {
 

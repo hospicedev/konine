@@ -8,7 +8,7 @@
  * @category   Undocumented
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @since      3.0.7
  */
 abstract class Kohana_Kodoc_Missing {

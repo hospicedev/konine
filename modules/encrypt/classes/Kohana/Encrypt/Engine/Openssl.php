@@ -16,7 +16,7 @@
  * @package    Kohana/Encrypt
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Encrypt_Engine_Openssl extends Kohana_Encrypt_Engine {
 

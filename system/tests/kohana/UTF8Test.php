@@ -10,7 +10,7 @@
  * @category   Tests
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_UTF8Test extends Unittest_TestCase
 {

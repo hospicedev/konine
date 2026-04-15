@@ -17,7 +17,7 @@ return [
 			'description' => 'Database agnostic querying and result management.',
 			
 			// Copyright message, shown in the footer for this module
-			'copyright' => '&copy; 2008–2016 Kohana Team - 2016-2018 Koseven Team - https://github.com/orgs/koseven/people',
+			'copyright' => '&copy; 2008–2016 Kohana Team, 2016-2018 Koseven Team, 2026 Konine Team',
 		]	
 	]
 ];

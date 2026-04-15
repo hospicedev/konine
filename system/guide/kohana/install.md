@@ -2,7 +2,7 @@
 
 [!!] Before continuing, make sure you have a web server (like Apache) configured with the following requirements.
 
- - PHP 7.0.21 or newer.
+ - PHP 8.1 or newer.
  - [PHP Short open tag Enabled](http://php.net/manual/en/ini.core.php#ini.short-open-tag)
  - [Iconv Extension](http://php.net/iconv)
  - [Character Type (CTYPE) Extension](http://php.net/ctype)
@@ -13,7 +13,7 @@
 
 # Download
 
-You can get the latest **stable** release on the [Koseven website](https://koseven.ga/). This will give you a fully functional application with an `application`, `modules`, and `system` directory.
+You can get the latest **stable** release from the [Konine GitHub repository](https://github.com/hospicedev/konine). This will give you a fully functional application with an `application`, `modules`, and `system` directory.
 
 [!!] You can find information about the file structure on the [Cascading Filesystem](files) page.
 
@@ -76,11 +76,11 @@ Once your install page reports that your environment is set up correctly you nee
 
 ## Installing Kohana From GitHub
 
-The [source code](https://github.com/koseven/koseven) for Kohana is hosted with [GitHub](http://github.com). To install Kohana using the github source code first you need to install [git](http://git-scm.com/). Visit [http://help.github.com](http://help.github.com) for details on how to install git on your platform.
+The [source code](https://github.com/hospicedev/konine) for Konine is hosted on [GitHub](http://github.com). To install Konine using the github source code first you need to install [git](http://git-scm.com/). Visit [http://help.github.com](http://help.github.com) for details on how to install git on your platform.
 
-Use the following command to install Kohana from GitHub:
+Use the following command to install Konine from GitHub:
 ~~~
-git clone git@github.com:koseven/koseven.git .
+git clone git@github.com:hospicedev/konine.git .
 ~~~
 
 [!!] For more information on installing Kohana using git, see the [Working with Git](tutorials/git) tutorial.
