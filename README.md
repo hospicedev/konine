@@ -12,7 +12,7 @@
 
 Konine exists as **end-of-life support** for existing Kohana/Koseven applications. It provides:
 
-- PHP 8.x / 8.4 compatibility fixes
+- PHP 8.4 compatibility fixes
 - Security patches
 - Bug fixes for existing functionality
 
@@ -68,12 +68,15 @@ Konine is the latest chapter — not a rebirth, but an honest acknowledgement th
 
 ## Requirements
 
-- PHP >= 8.1 (PHP 8.4 is the primary target)
+- PHP >= 8.4
 - A web server (Apache, Nginx, etc.)
+- `ext-mbstring` enabled
 
 ---
 
 ## Installation
+
+### Fresh clone
 
 ```bash
 git clone https://github.com/hospicedev/konine.git
@@ -82,6 +85,31 @@ composer install
 ```
 
 Configure your web server to point to the `public/` directory.
+
+### Migrating an existing Koseven / Kohana project
+
+If you have an existing project on Koseven or Kohana, you can pull Konine's changes in directly rather than starting from scratch:
+
+```bash
+# Add Konine as a remote
+git remote add konine https://github.com/hospicedev/konine.git
+
+# Fetch all Konine branches
+git fetch konine
+
+# Merge into your current branch
+git merge konine/master --allow-unrelated-histories
+```
+
+Resolve any merge conflicts — in general, keep your application code and favour Konine's versions of anything under `system/` and the bundled `modules/`, unless you have intentional local overrides in those directories.
+
+To pull future patches once the remote is set up:
+
+```bash
+git fetch konine && git merge konine/master
+```
+
+See the [upgrading guide](https://konine.dev/documentation/kohana/upgrading-from-kohana) for a full list of breaking changes introduced in 3.4.x.
 
 ---
 
