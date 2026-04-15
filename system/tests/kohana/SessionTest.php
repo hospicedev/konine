@@ -12,7 +12,7 @@
  * @author     Kohana Team
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_SessionTest extends Unittest_TestCase
 {
@@ -101,7 +101,7 @@ class Kohana_SessionTest extends Unittest_TestCase
 		// Don't auto-call constructor, we need to setup the mock first
 		$session = $this->getMockBuilder('Session')
 			->disableOriginalConstructor()
-			->setMethods(['read'])
+			->onlyMethods(['read'])
 			->getMockForAbstractClass();
 
 		$session
@@ -389,7 +389,7 @@ class Kohana_SessionTest extends Unittest_TestCase
 		$session->expects($this->once())
 				->method('_read')
 				->with($session_id)
-				->will($this->returnValue($driver_data));
+				->willReturn($driver_data);
 
 		$session->read($session_id);
 		$this->assertAttributeSame($expected_data, '_data', $session);
@@ -410,7 +410,7 @@ class Kohana_SessionTest extends Unittest_TestCase
 		$session->expects($this->once())
 				->method('_regenerate')
 				->with()
-				->will($this->returnValue($new_session_id));
+				->willReturn($new_session_id);
 
 		$this->assertSame($new_session_id, $session->regenerate());
 	}
@@ -434,7 +434,7 @@ class Kohana_SessionTest extends Unittest_TestCase
 			->expects($this->once())
 			->method('_destroy')
 			->with()
-			->will($this->returnValue(TRUE));
+			->willReturn(TRUE);
 
 		$this->assertTrue($session->destroy());
 
@@ -460,7 +460,7 @@ class Kohana_SessionTest extends Unittest_TestCase
 			->expects($this->once())
 			->method('_destroy')
 			->with()
-			->will($this->returnValue(FALSE));
+			->willReturn(FALSE);
 
 		$this->assertFalse($session->destroy());
 		$this->assertAttributeSame(

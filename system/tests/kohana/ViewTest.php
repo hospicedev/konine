@@ -11,7 +11,7 @@
  * @category   Tests
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_ViewTest extends Unittest_TestCase
 {

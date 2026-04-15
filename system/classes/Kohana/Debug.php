@@ -6,7 +6,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Debug {
 
@@ -344,7 +344,7 @@ class Kohana_Debug {
 	 * @param   array   $trace
 	 * @return  string
 	 */
-	public static function trace(array $trace = NULL)
+	public static function trace(?array $trace = NULL)
 	{
 		if ($trace === NULL)
 		{

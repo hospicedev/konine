@@ -6,7 +6,7 @@
  * @category   Session
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 abstract class Kohana_Session {
 
@@ -95,7 +95,7 @@ abstract class Kohana_Session {
 	 * @return  void
 	 * @uses    Session::read
 	 */
-	public function __construct(array $config = NULL, $id = NULL)
+	public function __construct(?array $config = NULL, $id = NULL)
 	{
 		if (isset($config['name']))
 		{

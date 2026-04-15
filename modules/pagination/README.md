@@ -45,4 +45,4 @@ class Controller_Products extends Controller_Template
 ```
 
 ## License
-This package is open-sourced software licensed under the [BSD license](https://koseven.ga/LICENSE.md)
+This package is open-sourced software licensed under the [BSD license](https://github.com/hospicedev/konine/blob/master/LICENSE.md)

@@ -8,7 +8,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @since      3.1.0
  */
 class Kohana_Response implements HTTP_Response {
@@ -108,6 +108,7 @@ class Kohana_Response implements HTTP_Response {
 		503 => 'Service Unavailable',
 		504 => 'Gateway Timeout',
 		505 => 'HTTP Version Not Supported',
+		506 => 'Variant Also Negotiates',
 		507 => 'Insufficient Storage',
 		508 => 'Loop Detected',
 		509 => 'Bandwidth Limit Exceeded',
@@ -432,7 +433,7 @@ class Kohana_Response implements HTTP_Response {
 	 * @uses    File::mime
 	 * @uses    Request::send_headers
 	 */
-	public function send_file($filename, $download = NULL, array $options = NULL)
+	public function send_file($filename, $download = NULL, ?array $options = NULL)
 	{
 		if ( ! empty($options['mime_type']))
 		{

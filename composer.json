@@ -1,14 +1,21 @@
 {
-  "name": "koseven/koseven",
-  "description": "Koseven Framework - PHP-7 compatible replacement for Kohana",
+  "name": "hospicedev/konine",
+  "description": "Konine — PHP 8.4+ HMVC framework. End-of-life maintenance fork of Koseven/Kohana.",
   "license": "BSD-3-Clause",
   "keywords": [
     "kohana",
-    "kohana-php7",
-    "koseven"
+    "koseven",
+    "konine",
+    "hmvc",
+    "php8"
   ],
-  "homepage": "https://koseven.ga/",
+  "homepage": "https://konine.dev/",
   "authors": [
+    {
+      "name": "Konine Team",
+      "homepage": "https://konine.dev/",
+      "role": "developer"
+    },
     {
       "name": "Koseven Team",
       "homepage": "https://koseven.ga/",
@@ -22,17 +29,16 @@
     }
   ],
   "support": {
-    "forum": "https://telegram.me/koseven",
-    "issues": "https://github.com/koseven/koseven/issues"
+    "issues": "https://github.com/hospicedev/konine/issues"
   },
   "require": {
-    "php": ">=7.1"
+    "php": ">=8.4",
+    "ext-mbstring": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.5.2",
-    "phpunit/phpcov": "^5",
-    "php-coveralls/php-coveralls": "^2.0",
-    "phpunit/dbunit": "4.0.x-dev"
+    "phpunit/phpunit": "^10.5",
+    "phpunit/phpcov": "^9.0",
+    "php-coveralls/php-coveralls": "^2.0"
   },
   "replace": {
     "kohana/core": "3.3.*"

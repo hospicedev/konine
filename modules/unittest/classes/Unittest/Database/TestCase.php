@@ -9,7 +9,7 @@
  * @package    Kohana/UnitTest
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 abstract class Unittest_Database_TestCase extends Kohana_Unittest_Database_TestCase
 {

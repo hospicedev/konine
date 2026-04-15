@@ -10,8 +10,8 @@ use PHPUnit\Framework\TestResult;
  * @package    Kohana/UnitTest
  * @author     Kohana Team
  * @copyright  (c) 2007-2012 Kohana Team
- * @copyright  (c) 2016-2018 Koseven Team
- * @license    https://koseven.ga/LICENSE.md
+ * @copyright  (c) 2016-2018 Koseven Team, 2026 Konine Team
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 abstract class Kohana_Unittest_TestSuite extends TestSuite 
 {
@@ -31,7 +31,7 @@ abstract class Kohana_Unittest_TestSuite extends TestSuite
 	 * @param TestResult|null $result
 	 * @return TestResult
 	 */
-    public function run(TestResult $result = NULL): TestResult
+    public function run(?TestResult $result = NULL): TestResult
     {
 		// Get the code coverage filter from the suite's result object
 		$coverage = $result->getCodeCoverage();

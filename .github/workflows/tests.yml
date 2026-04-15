@@ -1,38 +1,32 @@
-  name: tests
-  on: [push,pull_request]
-  jobs:
-    test:
-      runs-on: ubuntu-latest
-      services:
-        memcached:
-          image: memcached:1.6-alpine
-          ports:
-            - 11211:11211
-        redis:
-          image: redis:5.0
-          ports:
-            - 6379:6379
-          options: --entrypoint redis-server
-      strategy:
-        fail-fast: true
-        matrix:
-          php: ['7.1', '7.2', '7.3', '7.4']
-#          #php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
-#          PHP8.x
-#          Problem 1
-#          - Root composer.json requires phpunit/phpcov ^5 -> satisfiable by phpunit/phpcov[5.0.0].
-#          - phpunit/phpcov 5.0.0 requires php ^7.1 -> your php version (8.2.19) does not satisfy that requirement.
-#          Problem 2
-#          - phpunit/phpunit[7.5.2, ..., 7.5.20] require php ^7.1 -> your php version (8.2.19) does not satisfy that requirement.
-#          - Root composer.json requires phpunit/phpunit ^7.5.2 -> satisfiable by phpunit/phpunit[7.5.2, ..., 7.5.20].
-#
-          stability: [prefer-lowest, prefer-stable]
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      memcached:
+        image: memcached:1.6-alpine
+        ports:
+          - 11211:11211
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.4']
+        stability: [prefer-stable]
 
-      name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
+    name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
 
-      steps:
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -42,29 +36,8 @@
           tools: composer:v2
           coverage: none
 
-      - name: Set Minimum Guzzle Version
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 8
-          max_attempts: 8
-          command: composer require guzzlehttp/guzzle:^7.2 --no-interaction --no-update
-        if: matrix.php >= 8
-
       - name: Install dependencies
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 8
-          max_attempts: 8
-          command: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
+        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
-        run: vendor/bin/phpunit #--verbose
-#        env:
-#        - name: Mount Directories and run Docker-Machine
-#          run: docker run -dtP --name unittest -v /home/runner/work/koseven/koseven:/tmp/koseven/ koseven/docker:travis-devel
-#
-#        - name: Install composer dependencies
-#          run: docker exec unittest /bin/sh -c "service redis-server start; cd /tmp/koseven; composer install"
-#
-#        - name: Run Koseven Unittest(s)
-#          run: docker exec unittest /bin/sh -c "cd /tmp/koseven; php vendor/bin/phpunit"
+        run: vendor/bin/phpunit

@@ -12,7 +12,7 @@
  * @author     Kohana Team
  * @author     BRMatt <matthew@sigswitch.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 
 include Kohana::find_file('tests', 'test_data/callback_routes');
@@ -53,10 +53,10 @@ class Kohana_RouteTest extends Unittest_TestCase
 	 *
 	 * @test
 	 * @covers Route::get
-	 * @expectedException Kohana_Exception
 	 */
 	public function test_get_throws_exception_if_route_dnx()
 	{
+		$this->expectException('Kohana_Exception');
 		Route::get('HAHAHAHAHAHAHAHAHA');
 	}
 
@@ -957,12 +957,11 @@ class Kohana_RouteTest extends Unittest_TestCase
 		$request->expects($this->any())
 			->method('uri')
 		  	// Request::uri() called by Route::matches() in the tests will return $uri
-			->will($this->returnValue($uri));
+			->willReturn($uri);
 
 		// also mock `method` method
 		$request->expects($this->any())
-			->method('method')
-			->withAnyParameters();
+			->method('method');
 
 		return $request;
 	}

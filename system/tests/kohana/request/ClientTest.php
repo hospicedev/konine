@@ -12,7 +12,7 @@
  * @author     Kohana Team
  * @author	   Andrew Coulton
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Request_ClientTest extends Unittest_TestCase
 {
@@ -35,13 +35,13 @@ class Kohana_Request_ClientTest extends Unittest_TestCase
 		$routes_prop = $route_class->getProperty('_routes');
 		$routes_prop->setAccessible(TRUE);
 
-		self::$_original_routes = $routes_prop->getValue('Route');
+		self::$_original_routes = $routes_prop->getValue(null);
 
 		$routes = [
 			'ko_request_clienttest' => new Route('<controller>/<action>/<data>',['data'=>'.+'])
 		] + self::$_original_routes;
 
-		$routes_prop->setValue('Route',$routes);
+		$routes_prop->setValue(null, $routes);
 
 	}
 
@@ -56,7 +56,7 @@ class Kohana_Request_ClientTest extends Unittest_TestCase
 		$route_class = new ReflectionClass('Route');
 		$routes_prop = $route_class->getProperty('_routes');
 		$routes_prop->setAccessible(TRUE);
-		$routes_prop->setValue('Route',self::$_original_routes);
+		$routes_prop->setValue(null, self::$_original_routes);
 
 		parent::tearDownAfterClass();
 	}

@@ -12,7 +12,7 @@
  * @author     Kohana Team
  * @author     BRMatt <matthew@sigswitch.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_URLTest extends Unittest_TestCase
 {
@@ -366,11 +366,11 @@ class Kohana_URLTest extends Unittest_TestCase
 	 * Tests if invalid host throws "Invalid host" exception
 	 *
 	 * @test
-	 * @expectedException Kohana_Exception
-	 * @expectedExceptionMessage Invalid host <invalid>
 	 */
 	public function test_if_invalid_host_throws_exception()
 	{
+		$this->expectException('Kohana_Exception');
+		$this->expectExceptionMessage('Invalid host <invalid>');
 		// set the global HTTP_HOST to <invalid>
 		$_SERVER['HTTP_HOST'] = '<invalid>';
 		// trigger exception
@@ -381,11 +381,11 @@ class Kohana_URLTest extends Unittest_TestCase
 	 * Tests if untrusted host throws "Untrusted host" exception
 	 *
 	 * @test
-	 * @expectedException Kohana_Exception
-	 * @expectedExceptionMessage Untrusted host untrusted.com
 	 */
 	public function test_if_untrusted_host_throws_exception()
 	{
+		$this->expectException('Kohana_Exception');
+		$this->expectExceptionMessage('Untrusted host untrusted.com');
 		// set the global HTTP_HOST to a valid but untrusted host
 		$_SERVER['HTTP_HOST'] = 'untrusted.com';
 		// trigger exception

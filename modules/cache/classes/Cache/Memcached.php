@@ -16,7 +16,7 @@
  * @package   Kohana/Cache
  * @author    gimpe <gimpehub@intljaywalkers.com>
  * @copyright 2011 International Jaywalkers
- * @copyright (c) 2018 Koseven Team
+ * @copyright (c) 2018 Koseven Team, 2026 Konine Team
  * @license   http://creativecommons.org/licenses/by/3.0/ CC BY 3.0
  * @link      http://github.com/gimpe/kohana-memcached
  */

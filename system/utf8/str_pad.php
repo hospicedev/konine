@@ -10,6 +10,10 @@
  */
 function _str_pad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT)
 {
+	// PHP 8.3+ provides native multibyte str_pad support
+	if (function_exists('mb_str_pad'))
+		return mb_str_pad($str, $final_str_length, $pad_str, $pad_type);
+
 	if (UTF8::is_ascii($str) AND UTF8::is_ascii($pad_str))
 		return str_pad($str, $final_str_length, $pad_str, $pad_type);
 

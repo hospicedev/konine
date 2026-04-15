@@ -1,6 +1,6 @@
 # Error/Exception Handling
 
-Koseven provides both an exception handler and an error handler that transforms errors into exceptions using PHP's [ErrorException](http://php.net/errorexception) class. Many details of the error and the internal state of the application is displayed by the handler:
+Konine provides both an exception handler and an error handler that transforms errors into exceptions using PHP's [ErrorException](http://php.net/errorexception) class. Many details of the error and the internal state of the application is displayed by the handler:
 
 1. Exception class
 2. Error level
@@ -23,7 +23,7 @@ If you do not want to use the internal error handling, you can disable it (highl
 
 ## Error Reporting
 
-By default, Koseven displays all errors and warnings. This is set using [error_reporting](http://php.net/error_reporting):
+By default, Konine displays all errors and warnings. This is set using [error_reporting](http://php.net/error_reporting):
 
     error_reporting(E_ALL);
 
@@ -39,7 +39,7 @@ Errors should **always** be displayed, even in production, because it allows you
 
 ## HTTP Exception Handling
 
-Koseven comes with a robust system for handing http errors. It includes exception classes for each http status code. To trigger a 404 in your application (the most common scenario):
+Konine comes with a robust system for handing http errors. It includes exception classes for each http status code. To trigger a 404 in your application (the most common scenario):
 
 	throw HTTP_Exception::factory(404, 'File not found!');
 

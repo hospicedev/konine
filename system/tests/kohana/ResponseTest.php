@@ -11,7 +11,7 @@
  * @category   Tests
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_ResponseTest extends Unittest_TestCase
 {
@@ -25,7 +25,7 @@ class Kohana_ResponseTest extends Unittest_TestCase
 		$view = $this->createMock('View');
 		$view->expects($this->any())
 			->method('__toString')
-			->will($this->returnValue('foo'));
+			->willReturn('foo');
 
 		return [
 			['unit test', 'unit test'],

@@ -11,7 +11,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Core {
 
@@ -167,7 +167,7 @@ class Kohana_Core {
 	 * @uses    Kohana::cache
 	 * @uses    Profiler
 	 */
-	public static function init(array $settings = NULL)
+	public static function init(?array $settings = NULL)
 	{
 		if (Kohana::$_init)
 		{
@@ -474,7 +474,7 @@ class Kohana_Core {
 	 * @param   array   $modules    list of module paths
 	 * @return  array   enabled modules
 	 */
-	public static function modules(array $modules = NULL)
+	public static function modules(?array $modules = NULL)
 	{
 		if ($modules === NULL)
 		{
@@ -663,7 +663,7 @@ class Kohana_Core {
 	 * @param   array   $paths      list of paths to search
 	 * @return  array
 	 */
-	public static function list_files($directory = NULL, array $paths = NULL)
+	public static function list_files($directory = NULL, ?array $paths = NULL)
 	{
 		if ($directory !== NULL)
 		{
@@ -997,7 +997,7 @@ class Kohana_Core {
 	 */
 	public static function version()
 	{
-		return 'Koseven '.Kohana::VERSION.' ('.Kohana::CODENAME.')';
+		return 'Konine '.Kohana::VERSION.' ('.Kohana::CODENAME.')';
 	}
 
 }

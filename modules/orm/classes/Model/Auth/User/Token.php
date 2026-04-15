@@ -5,7 +5,7 @@
  * @package    Kohana/Auth
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Model_Auth_User_Token extends ORM {
 
@@ -56,7 +56,7 @@ class Model_Auth_User_Token extends ORM {
 		return $this;
 	}
 
-	public function create(Validation $validation = NULL)
+	public function create(?Validation $validation = NULL)
 	{
 		$this->token = $this->create_token();
 

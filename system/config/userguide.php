@@ -17,7 +17,7 @@ return [
 			'description' => 'Documentation for Kohana core/system.',
 
 			// Copyright message, shown in the footer for this module
-			'copyright' => '&copy; 2008–2017 Koseven Team',
+			'copyright' => '&copy; 2008–2017 Kohana/Koseven Team, 2026 Konine Team',
 		],
 	],
 

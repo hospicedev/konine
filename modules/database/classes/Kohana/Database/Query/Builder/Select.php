@@ -6,7 +6,7 @@
  * @category   Query
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Database_Query_Builder_Select extends Database_Query_Builder_Where {
 
@@ -43,7 +43,7 @@ class Kohana_Database_Query_Builder_Select extends Database_Query_Builder_Where 
 	 * @param   array  $columns  column list
 	 * @return  void
 	 */
-	public function __construct(array $columns = NULL)
+	public function __construct(?array $columns = NULL)
 	{
 		if ( ! empty($columns))
 		{

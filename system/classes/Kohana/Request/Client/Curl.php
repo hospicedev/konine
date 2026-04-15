@@ -7,7 +7,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @uses       [PHP cURL](http://php.net/manual/en/book.curl.php)
  */
 class Kohana_Request_Client_Curl extends Request_Client_External {
@@ -65,6 +65,16 @@ class Kohana_Request_Client_Curl extends Request_Client_External {
 
 		// Apply any additional options set to
 		$options += $this->_options;
+
+		// Validate all option keys are integer CURLOPT_* constants
+		foreach ($options as $key => $value)
+		{
+			if ( ! is_int($key))
+			{
+				throw new Request_Exception('Invalid CURL option key: :key — keys must be CURLOPT_* integer constants',
+					[':key' => $key]);
+			}
+		}
 
 		$uri = $request->uri();
 

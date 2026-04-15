@@ -9,7 +9,7 @@
  * @category   Test
  * @author     Craig Duncan <git@duncanc.co.uk>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 
 class Kohana_ORMTest extends Unittest_TestCase

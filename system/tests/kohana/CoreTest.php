@@ -14,7 +14,7 @@
  * @author     Kohana Team
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_CoreTest extends Unittest_TestCase
 {
@@ -277,12 +277,12 @@ class Kohana_CoreTest extends Unittest_TestCase
 	 *
 	 * @test
 	 * @dataProvider provider_modules_detects_invalid_modules
-	 * @expectedException Kohana_Exception
 	 * @param boolean $source   Input for Kohana::modules
 	 *
 	 */
 	public function test_modules_detects_invalid_modules($source)
 	{
+		$this->expectException('Kohana_Exception');
 		$modules = Kohana::modules();
 
 		try

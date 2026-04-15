@@ -8,7 +8,7 @@
  * @category   Undocumented
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @since      3.0.7
  */
 abstract class Kohana_Kodoc_Missing {
@@ -28,6 +28,12 @@ abstract class Kohana_Kodoc_Missing {
 	{
 		if ( ! class_exists($class))
 		{
+			// Validate that $class contains only valid PHP class/namespace characters
+			if ( ! preg_match('/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff\\\\]*$/', $class))
+			{
+				return FALSE;
+			}
+
 			// Create a new missing class
 			if (FALSE === strpos($class, '\\'))
 			{

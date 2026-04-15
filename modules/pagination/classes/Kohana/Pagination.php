@@ -3,11 +3,11 @@
 /**
  * Pagination links generator.
  *
- * @package    Koseven/Pagination
+ * @package    Konine/Pagination
  * @category   Base
  * @author     Koseven Team
- * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @copyright  (c) Kohana Team, Koseven Team, 2026 Konine Team
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Pagination {
 
@@ -69,7 +69,7 @@ class Kohana_Pagination {
 	 * @param   array  configuration
 	 * @return  Pagination
 	 */
-	public static function factory(array $config = [], Request $request = NULL)
+	public static function factory(array $config = [], ?Request $request = NULL)
 	{
 		return new Pagination($config, $request);
 	}
@@ -80,7 +80,7 @@ class Kohana_Pagination {
 	 * @param   array  configuration
 	 * @return  void
 	 */
-	public function __construct(array $config = [], Request $request = NULL)
+	public function __construct(array $config = [], ?Request $request = NULL)
 	{
 		// Overwrite system defaults with application defaults
 		$this->config = $this->config_group() + $this->config;
@@ -290,7 +290,7 @@ class Kohana_Pagination {
 	 * @return	Request	If used as getter
 	 * @return	$this	Chainable as setter
 	 */
-	public function request(Request $request = NULL)
+	public function request(?Request $request = NULL)
 	{
 		if ($request === NULL)
 			return $this->_request;
@@ -307,7 +307,7 @@ class Kohana_Pagination {
 	 * @return	Route	Route if used as getter
 	 * @return	$this	Chainable as setter
 	 */
-	public function route(Route $route = NULL)
+	public function route(?Route $route = NULL)
 	{
 		if ($route === NULL)
 			return $this->_route;
@@ -324,7 +324,7 @@ class Kohana_Pagination {
 	 * @return	array	Route parameters if used as getter
 	 * @return	$this	Chainable as setter
 	 */
-	public function route_params(array $route_params = NULL)
+	public function route_params(?array $route_params = NULL)
 	{
 		if ($route_params === NULL)
 			return $this->_route_params;
@@ -340,7 +340,7 @@ class Kohana_Pagination {
 	 * @param	array	Parameters to override
 	 * @return	string
 	 */
-	public function query(array $params = NULL)
+	public function query(?array $params = NULL)
 	{
 		if ($params === NULL)
 		{

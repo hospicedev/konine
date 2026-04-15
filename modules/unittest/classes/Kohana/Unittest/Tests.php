@@ -8,7 +8,7 @@
  * @author     BRMatt <matthew@sigswitch.com>
  * @author	   Paul Banks
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Unittest_Tests {
 	static protected $cache = [];
@@ -125,7 +125,7 @@ class Kohana_Unittest_Tests {
 	 * @param array $directories Optional directories to whitelist
 	 * @param Unittest_Testsuite $suite Suite to load the whitelist into
 	 */
-	static public function whitelist(array $directories = NULL, Unittest_TestSuite $suite = NULL)
+	static public function whitelist(?array $directories = NULL, ?Unittest_TestSuite $suite = NULL)
 	{
 		if (empty($directories))
 		{
@@ -198,7 +198,7 @@ class Kohana_Unittest_Tests {
 	 * @param array $files Array of files to whitelist
 	 * @param Unittest_TestSuite $suite Suite to load the whitelist into
 	 */
-	static protected function set_whitelist($files, Unittest_TestSuite $suite = NULL)
+	static protected function set_whitelist($files, ?Unittest_TestSuite $suite = NULL)
 	{
 
 		foreach ($files as $file)

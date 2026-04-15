@@ -8,7 +8,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @since      3.2.0
  */
 class Kohana_HTTP_Cache {
@@ -209,7 +209,7 @@ class Kohana_HTTP_Cache {
 	 * @return  Kohana_Cache
 	 * @return  Kohana_Request_Client
 	 */
-	public function cache(Cache $cache = NULL)
+	public function cache(?Cache $cache = NULL)
 	{
 		if ($cache === NULL)
 			return $this->_cache;
@@ -352,7 +352,7 @@ class Kohana_HTTP_Cache {
 	 * @param   Response    $response   the HTTP Response
 	 * @return  mixed
 	 */
-	public function cache_response($key, Request $request, Response $response = NULL)
+	public function cache_response($key, Request $request, ?Response $response = NULL)
 	{
 		if ( ! $this->_cache instanceof Cache)
 			return FALSE;
@@ -381,7 +381,7 @@ class Kohana_HTTP_Cache {
 			}
 			else
 			{
-				$hit_count = $this->_cache->get(HTTP_Cache::CACHE_HIT_KEY.$key);
+				$hit_count = (int) $this->_cache->get(HTTP_Cache::CACHE_HIT_KEY.$key);
 				$this->_cache->set(HTTP_Cache::CACHE_HIT_KEY.$key, ++$hit_count);
 			}
 

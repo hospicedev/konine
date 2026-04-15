@@ -6,7 +6,7 @@
  * @category   Query
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Database_Query {
 
@@ -115,7 +115,7 @@ class Kohana_Database_Query {
 	 * @param   array   $params
 	 * @return  $this
 	 */
-	public function as_object($class = TRUE, array $params = NULL)
+	public function as_object($class = TRUE, ?array $params = NULL)
 	{
 		$this->_as_object = $class;
 

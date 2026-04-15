@@ -12,7 +12,7 @@
  * @author     Kohana Team
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_UploadTest extends Unittest_TestCase
 {
@@ -93,10 +93,10 @@ class Kohana_UploadTest extends Unittest_TestCase
 	 *
 	 * @test
 	 * @covers upload::size
-	 * @expectedException Kohana_Exception
 	 */
 	public function test_size_throws_exception_for_invalid_size()
 	{
+		$this->expectException('Kohana_Exception');
 		$this->setEnvironment([
 			'_FILES' => [
 				'unit_test' => [
@@ -113,14 +113,12 @@ class Kohana_UploadTest extends Unittest_TestCase
 	}
 
 	/**
-	 * Provides test data for test_vali()
+	 * Provides test data for test_valid()
 	 *
-	 * @test
 	 * @return array
 	 */
 	public function provider_valid()
 	{
-        $this->markAsRisky();
 		return [
 			[
 				TRUE,

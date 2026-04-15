@@ -16,7 +16,7 @@
  * @category   Session
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Session_Database extends Session {
 
@@ -42,7 +42,7 @@ class Kohana_Session_Database extends Session {
 	// The old session id
 	protected $_update_id;
 
-	public function __construct(array $config = NULL, $id = NULL)
+	public function __construct(?array $config = NULL, $id = NULL)
 	{
 		if ( ! isset($config['group']))
 		{

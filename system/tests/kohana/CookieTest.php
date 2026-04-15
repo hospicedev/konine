@@ -13,7 +13,7 @@
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
  * @author     Andrew Coulton <andrew@ingenerator.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_CookieTest extends Unittest_TestCase
 {
@@ -174,10 +174,10 @@ class Kohana_CookieTest extends Unittest_TestCase
 
 	/**
 	 * @covers Cookie::salt
-	 * @expectedException Kohana_Exception
 	 */
 	public function test_salt_throws_with_no_configured_salt()
 	{
+		$this->expectException('Kohana_Exception');
 		Cookie::$salt = NULL;
 		Cookie::salt('key', 'value');
 	}

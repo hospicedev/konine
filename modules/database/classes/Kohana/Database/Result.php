@@ -6,7 +6,7 @@
  * @category   Query/Result
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 abstract class Kohana_Database_Result implements Countable, Iterator, SeekableIterator, ArrayAccess {
 
@@ -35,7 +35,7 @@ abstract class Kohana_Database_Result implements Countable, Iterator, SeekableIt
 	 * @param   array   $params
 	 * @return  void
 	 */
-	public function __construct($result, $sql, $as_object = FALSE, array $params = NULL)
+	public function __construct($result, $sql, $as_object = FALSE, ?array $params = NULL)
 	{
 		// Store the result locally
 		$this->_result = $result;

@@ -10,7 +10,7 @@
  * @author     Kohana Team
  * @since      3.1.0
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_HTTP_Header extends ArrayObject {
 
@@ -941,7 +941,7 @@ class Kohana_HTTP_Header extends ArrayObject {
 	 * @return  mixed
 	 * @since   3.2.0
 	 */
-	public function send_headers(HTTP_Response $response = NULL, $replace = FALSE, $callback = NULL)
+	public function send_headers(?HTTP_Response $response = NULL, $replace = FALSE, $callback = NULL)
 	{
 		$protocol = $response->protocol();
 		$status = $response->status();

@@ -6,7 +6,7 @@
  * @category   Drivers
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Database_PDO extends Database {
 
@@ -130,7 +130,7 @@ class Kohana_Database_PDO extends Database {
 		$this->_connection->exec('SET NAMES '.$this->quote($charset));
 	}
 
-	public function query($type, $sql, $as_object = FALSE, array $params = NULL)
+	public function query($type, $sql, $as_object = FALSE, ?array $params = NULL)
 	{
 		// Make sure the database is connected
 		$this->_connection or $this->connect();

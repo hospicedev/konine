@@ -17,7 +17,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_DB {
 
@@ -71,7 +71,7 @@ class Kohana_DB {
 	 * @param   array   $columns  columns to select
 	 * @return  Database_Query_Builder_Select
 	 */
-	public static function select_array(array $columns = NULL)
+	public static function select_array(?array $columns = NULL)
 	{
 		return new Database_Query_Builder_Select($columns);
 	}
@@ -86,7 +86,7 @@ class Kohana_DB {
 	 * @param   array   $columns  list of column names or array($column, $alias) or object
 	 * @return  Database_Query_Builder_Insert
 	 */
-	public static function insert($table = NULL, array $columns = NULL)
+	public static function insert($table = NULL, ?array $columns = NULL)
 	{
 		return new Database_Query_Builder_Insert($table, $columns);
 	}

@@ -6,7 +6,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 interface Kohana_Cache_Tagging {
 
@@ -22,7 +22,7 @@ interface Kohana_Cache_Tagging {
 	 * @param   array    $tags      tags [Optional]
 	 * @return  boolean
 	 */
-	public function set_with_tags($id, $data, $lifetime = NULL, array $tags = NULL);
+	public function set_with_tags($id, $data, $lifetime = NULL, ?array $tags = NULL);
 
 	/**
 	 * Delete cache entries based on a tag

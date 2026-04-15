@@ -13,7 +13,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @uses       [PHP Streams](http://php.net/manual/en/book.stream.php)
  */
 class Kohana_Request_Client_Stream extends Request_Client_External {
@@ -73,6 +73,12 @@ class Kohana_Request_Client_Stream extends Request_Client_External {
 		}
 
 		$stream = fopen($uri, $mode, FALSE, $context);
+
+		if ( ! is_resource($stream))
+		{
+			throw new Request_Exception('Error fetching remote :url: could not open stream',
+				[':url' => $uri]);
+		}
 
 		$meta_data = stream_get_meta_data($stream);
 

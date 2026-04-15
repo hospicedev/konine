@@ -6,7 +6,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @since      3.1.0
  */
 class Kohana_Request_Client_Internal extends Request_Client {

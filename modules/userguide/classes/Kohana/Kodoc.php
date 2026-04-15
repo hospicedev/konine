@@ -6,7 +6,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Kodoc {
 
@@ -116,7 +116,7 @@ class Kohana_Kodoc {
 	 * @param   array   array of files, obtained using Kohana::list_files
 	 * @return  array   an array of all the class names
 	 */
-	public static function classes(array $list = NULL)
+	public static function classes(?array $list = NULL)
 	{
 		if ($list === NULL)
 		{
@@ -157,7 +157,7 @@ class Kohana_Kodoc {
 	 * >     ~bluehawk
 	 *
 	 */
-	public static function class_methods(array $list = NULL)
+	public static function class_methods(?array $list = NULL)
 	{
 		$list = Kodoc::classes($list);
 

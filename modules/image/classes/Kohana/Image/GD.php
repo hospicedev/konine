@@ -6,7 +6,7 @@
  * @category   Drivers
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Image_GD extends Image {
 
@@ -276,7 +276,7 @@ class Kohana_Image_GD extends Image {
 		$transparent = imagecolorallocatealpha($this->_image, 0, 0, 0, 127);
 
 		// Rotate, setting the transparent color
-		$image = imagerotate($this->_image, 360 - $degrees, $transparent, 1);
+		$image = imagerotate($this->_image, 360 - $degrees, $transparent);
 
 		// Save the alpha of the rotated image
 		imagesavealpha($image, TRUE);

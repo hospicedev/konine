@@ -8,7 +8,7 @@
  * @category   Logging
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Log {
 
@@ -119,7 +119,7 @@ class Kohana_Log {
 	 * @param   array   $additional  additional custom parameters to supply to the log writer
 	 * @return  Log
 	 */
-	public function add($level, $message, array $values = NULL, array $additional = NULL)
+	public function add($level, $message, ?array $values = NULL, ?array $additional = NULL)
 	{
 		if ($values)
 		{

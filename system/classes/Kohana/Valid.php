@@ -6,7 +6,7 @@
  * @category   Security
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Valid {
 
@@ -48,6 +48,11 @@ class Kohana_Valid {
 	 */
 	public static function min_length($value, $length)
 	{
+		if (!$value)
+		{
+			return FALSE;
+		}
+
 		return UTF8::strlen($value) >= $length;
 	}
 

@@ -6,7 +6,7 @@
  * @category   Test
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_CacheTest extends Unittest_TestCase {
 
@@ -72,10 +72,10 @@ class Kohana_CacheTest extends Unittest_TestCase {
 	 * Tests that `clone($cache)` will be prevented to maintain singleton
 	 *
 	 * @return  void
-	 * @expectedException Cache_Exception
 	 */
 	public function test_cloning_fails()
 	{
+		$this->expectException('Cache_Exception');
 		$cache = $this->getMockBuilder('Cache')
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();

@@ -8,7 +8,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  * @since      3.1.0
  */
 abstract class Kohana_Request_Client {
@@ -165,7 +165,7 @@ abstract class Kohana_Request_Client {
 	 * @return  HTTP_Cache
 	 * @return  Request_Client
 	 */
-	public function cache(HTTP_Cache $cache = NULL)
+	public function cache(?HTTP_Cache $cache = NULL)
 	{
 		if ($cache === NULL)
 			return $this->_cache;

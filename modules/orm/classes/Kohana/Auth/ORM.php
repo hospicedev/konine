@@ -5,7 +5,7 @@
  * @package    Kohana/Auth
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Auth_ORM extends Auth {
 

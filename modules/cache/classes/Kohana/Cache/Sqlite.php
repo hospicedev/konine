@@ -8,7 +8,7 @@
  * @category   Base
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Cache_Sqlite extends Cache implements Cache_Tagging, Cache_GarbageCollect {
 
@@ -103,8 +103,14 @@ class Kohana_Cache_Sqlite extends Cache implements Cache_Tagging, Cache_GarbageC
 		// Otherwise return cached object
 		else
 		{
+			// Disable notices for unserializing
+			$ER = error_reporting(~E_NOTICE);
+
 			// Return the valid cache data
-			$data = @unserialize($result->cache);
+			$data = unserialize($result->cache);
+
+			// Turn notices back on
+			error_reporting($ER);
 
 			// Return the resulting data
 			return $data;
@@ -182,7 +188,7 @@ class Kohana_Cache_Sqlite extends Cache implements Cache_Tagging, Cache_GarbageC
 	 * @return  boolean
 	 * @throws  Cache_Exception
 	 */
-	public function set_with_tags($id, $data, $lifetime = NULL, array $tags = NULL)
+	public function set_with_tags($id, $data, $lifetime = NULL, ?array $tags = NULL)
 	{
 		// Serialize the data
 		$data = serialize($data);
@@ -271,7 +277,13 @@ class Kohana_Cache_Sqlite extends Cache implements Cache_Tagging, Cache_GarbageC
 
 		while ($row = $statement->fetchObject())
 		{
-			$result[$row->id] = @unserialize($row->cache);
+			// Disable notices for unserializing
+			$ER = error_reporting(~E_NOTICE);
+
+			$result[$row->id] = unserialize($row->cache);
+
+			// Turn notices back on
+			error_reporting($ER);
 		}
 
 		return $result;
@@ -312,7 +324,7 @@ class Kohana_Cache_Sqlite extends Cache implements Cache_Tagging, Cache_GarbageC
 		{
 			$statement->execute([':id' => $this->_sanitize_id($id)]);
 		}
-		catch (PDOExeption $e)
+		catch (PDOException $e)
 		{
 			throw new Cache_Exception('There was a problem querying the local SQLite3 cache. :error', [':error' => $e->getMessage()]);
 		}

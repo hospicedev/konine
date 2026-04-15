@@ -6,13 +6,13 @@
  * @category   Query/Result
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Database_MySQLi_Result extends Database_Result {
 
 	protected $_internal_row = 0;
 
-	public function __construct($result, $sql, $as_object = FALSE, array $params = NULL)
+	public function __construct($result, $sql, $as_object = FALSE, ?array $params = NULL)
 	{
 		parent::__construct($result, $sql, $as_object, $params);
 

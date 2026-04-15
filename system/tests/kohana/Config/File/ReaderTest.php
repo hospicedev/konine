@@ -11,7 +11,7 @@
  * @author     Jeremy Bush <contractfrombelow@gmail.com>
  * @author     Matt Button <matthew@sigswitch.com>
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Config_File_ReaderTest extends Kohana_Unittest_TestCase {
 
@@ -89,6 +89,6 @@ class Kohana_Config_File_ReaderTest extends Kohana_Unittest_TestCase {
 		// actual output.  Therefore to increase compatability we just 
 		// check that we've got an array and that it's not empty
 		$this->assertNotSame([], $values);
-		$this->assertInternalType('array',    $values);
+		$this->assertIsArray($values);
 	}
 }

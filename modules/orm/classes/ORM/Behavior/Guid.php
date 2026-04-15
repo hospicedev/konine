@@ -3,8 +3,8 @@
 /**
  * @package    Kohana/ORM
  * @author     Koseven Team
- * @copyright  (c) 2016-2018 Koseven Team
- * @license    https://koseven.ga/LICENSE.md
+ * @copyright  (c) 2016-2018 Koseven Team, 2026 Konine Team
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class ORM_Behavior_Guid extends ORM_Behavior {
 

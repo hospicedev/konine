@@ -11,9 +11,9 @@
  * @package    Kohana/ORM
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
-class Kohana_ORM extends Model implements serializable {
+class Kohana_ORM extends Model implements Serializable {
 
 	/**
 	 * Stores column information for ORM models
@@ -413,7 +413,10 @@ class Kohana_ORM extends Model implements serializable {
 		// Create the behaviors classes
 		foreach ($this->behaviors() as $behavior => $behavior_config)
 		{
-			$this->_behaviors[] = ORM_Behavior::factory($behavior, $behavior_config);
+			if ( ! is_object($behavior_config))
+			{
+				$this->_behaviors[$behavior] = ORM_Behavior::factory($behavior, $behavior_config);
+			}
 		}
 	}
 
@@ -598,7 +601,7 @@ class Kohana_ORM extends Model implements serializable {
 			: Arr::get($this->_changed, $field);
 	}
 
-	public function __unserialize($data)
+	public function __unserialize(array $data): void
 	{
 		// Initialize model
 		$this->_initialize();
@@ -842,7 +845,7 @@ class Kohana_ORM extends Model implements serializable {
 	 * @param  array $expected Array of keys to take from $values
 	 * @return ORM
 	 */
-	public function values(array $values, array $expected = NULL)
+	public function values(array $values, ?array $expected = NULL)
 	{
 		// Default to expecting everything except the primary key
 		if ($expected === NULL)
@@ -1317,7 +1320,7 @@ class Kohana_ORM extends Model implements serializable {
 	 */
 	public function behaviors()
 	{
-		return [];
+		return $this->_behaviors;
 	}
 
 	/**
@@ -1428,7 +1431,7 @@ class Kohana_ORM extends Model implements serializable {
 	 * @throws ORM_Validation_Exception
 	 * @return ORM
 	 */
-	public function check(Validation $extra_validation = NULL)
+	public function check(?Validation $extra_validation = NULL)
 	{
 		// Determine if any external validation failed
 		$extra_errors = ($extra_validation AND ! $extra_validation->check());
@@ -1459,7 +1462,7 @@ class Kohana_ORM extends Model implements serializable {
 	 * @throws Kohana_Exception
 	 * @return ORM
 	 */
-	public function create(Validation $validation = NULL)
+	public function create(?Validation $validation = NULL)
 	{
 		if ($this->_loaded)
 			throw new Kohana_Exception('Cannot create :model model because it is already loaded.', [':model' => $this->_object_name]);
@@ -1525,7 +1528,7 @@ class Kohana_ORM extends Model implements serializable {
 	 * @throws Kohana_Exception
 	 * @return ORM
 	 */
-	public function update(Validation $validation = NULL)
+	public function update(?Validation $validation = NULL)
 	{
 		if ( ! $this->_loaded)
 			throw new Kohana_Exception('Cannot update :model model because it is not loaded.', [':model' => $this->_object_name]);
@@ -1596,7 +1599,7 @@ class Kohana_ORM extends Model implements serializable {
 	 * @param  Validation $validation Validation object
 	 * @return ORM
 	 */
-	public function save(Validation $validation = NULL)
+	public function save(?Validation $validation = NULL)
 	{
 		return $this->loaded() ? $this->update($validation) : $this->create($validation);
 	}

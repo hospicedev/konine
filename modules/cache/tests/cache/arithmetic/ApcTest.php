@@ -8,7 +8,7 @@ include_once(Kohana::find_file('tests/cache/arithmetic', 'CacheArithmeticMethods
  * @category   Test
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_ApcTest extends Kohana_CacheArithmeticMethodsTest {
 

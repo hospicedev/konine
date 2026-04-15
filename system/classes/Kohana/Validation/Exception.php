@@ -4,7 +4,7 @@
  * @category   Exceptions
  * @author     Kohana Team
  * @copyright  (c) Kohana Team
- * @license    https://koseven.ga/LICENSE.md
+ * @license    https://github.com/hospicedev/konine/blob/master/LICENSE.md
  */
 class Kohana_Validation_Exception extends Kohana_Exception {
 
@@ -19,7 +19,7 @@ class Kohana_Validation_Exception extends Kohana_Exception {
 	 * @param  array        $values     translation variables
 	 * @param  int          $code       the exception code
 	 */
-	public function __construct(Validation $array, $message = 'Failed to validate array', array $values = NULL, $code = 0, Exception $previous = NULL)
+	public function __construct(Validation $array, $message = 'Failed to validate array', ?array $values = NULL, $code = 0, ?Exception $previous = NULL)
 	{
 		$this->array = $array;
 
