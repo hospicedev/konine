@@ -11,7 +11,7 @@ Koseven was archived on 2026-04-14. Konine exists as **end-of-life support** —
 - **GitHub:** https://github.com/hospicedev/konine
 - **Website:** https://konine.dev
 - **PHP version:** >=8.4
-- **Current version:** 3.4.0 (in progress, branched from koseven 3.3.10)
+- **Current version:** 3.4.0 (released 2026-04-15, tagged `v3.4.0`)
 - **License:** BSD-3-Clause
 - **Lineage:** Kohana 3.3.x -> Koseven 3.3.x -> Konine 3.4.x
 
@@ -73,7 +73,7 @@ Transparent extension pattern: `Kohana_ORM` (in system/modules) is extended by a
 | cache | Caching backends (file, sqlite, memcache, redis, apcu) |
 | codebench | Benchmarking tool |
 | database | Database abstraction (MySQLi, PDO) |
-| encrypt | Encryption (OpenSSL, Mcrypt) |
+| encrypt | Encryption (OpenSSL only — Mcrypt removed) |
 | image | Image manipulation (GD, Imagick) |
 | minion | CLI task runner |
 | orm | Object Relationship Mapping |
@@ -148,12 +148,12 @@ Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`, `ci`
 
 ## Testing
 
-Tests use PHPUnit (currently v7.5.x) bootstrapped via `modules/unittest/bootstrap.php`.
+Tests use PHPUnit `^10.5` bootstrapped via `modules/unittest/bootstrap.php`.
 
 - Test files live in `system/tests/` and `modules/*/tests/`
 - Test suite is defined in `phpunit.xml` at the project root
 - CI runs on push and PR via `.github/workflows/tests.yml`
-- CI matrix currently targets PHP 7.1-7.4 (needs updating to 8.1-8.4 as part of #2)
+- CI matrix targets PHP 8.4
 
 ### Running Tests Locally
 
@@ -164,12 +164,14 @@ vendor/bin/phpunit
 
 Some tests require memcached (port 11211) and redis (port 6379) services running locally.
 
+### Test Results (v3.4.0)
+
+```
+PHPUnit 10.5.x / PHP 8.4
+Tests: 1472, Assertions: 3067, Skipped: 97
+Errors: 0, Failures: 0, Warnings: 0
+```
+
 ## Known Issues and Remaining Work
 
-Tracked in https://github.com/hospicedev/konine/issues/2:
-
-- CI workflow matrix needs updating from PHP 7.x to 8.1-8.4
-- PHPUnit and dev dependencies need upgrading for PHP 8.x compatibility
-- `composer.json` package name still says `koseven/koseven`
 - Static analysis (PHPStan/Psalm) not yet configured
-- `ROADMAP.md` still contains upstream koseven versioning plan
