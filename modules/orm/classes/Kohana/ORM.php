@@ -611,6 +611,31 @@ class Kohana_ORM extends Model implements Serializable {
 			$this->{$name} = $var;
 		}
 
+		// Delegate the post-deserialization step to __wakeup(). As of PHP 8,
+		// once a class defines __unserialize() PHP no longer calls __wakeup()
+		// automatically. Invoking it here keeps __wakeup() working as the
+		// historical extension point, so application subclasses that placed
+		// logic there (and call parent::__wakeup()) continue to run unchanged.
+		$this->__wakeup();
+	}
+
+	/**
+	 * Re-establishes transient state after the object has been unserialized.
+	 *
+	 * For ORM this reloads the record from the database when
+	 * [ORM::$_reload_on_wakeup] is TRUE. It is retained as the documented
+	 * extension point for code written against pre-PHP 8 (Serializable /
+	 * __sleep+__wakeup) behaviour: PHP itself no longer calls __wakeup() once
+	 * __unserialize() exists, but Kohana_ORM::__unserialize() calls it for you.
+	 *
+	 * New code should prefer overriding [ORM::__unserialize] and calling
+	 * parent::__unserialize($data). Existing __wakeup() overrides should call
+	 * parent::__wakeup() to preserve the reload behaviour.
+	 *
+	 * @return void
+	 */
+	public function __wakeup()
+	{
 		if ($this->_reload_on_wakeup === TRUE)
 		{
 			// Reload the object

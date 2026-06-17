@@ -212,6 +212,7 @@ class Kohana_Auth_Bcrypt extends Auth {
      *
      * @param   mixed    $user                    username string, or user ORM object
      * @param   boolean  $mark_session_as_forced  mark the session as forced
+     * @throws  Kohana_Exception  when a username string does not match a user
      * @return  boolean
      */
     public function force_login($user, $mark_session_as_forced = FALSE)
@@ -223,6 +224,13 @@ class Kohana_Auth_Bcrypt extends Auth {
             // Load the user
             $user = ORM::factory('User');
             $user->where($user->unique_key($username), '=', $username)->find();
+
+            if ( ! $user->loaded())
+            {
+                // Refuse to complete a login for a user that does not exist,
+                // rather than writing a session entry for an empty ORM stub.
+                throw new Kohana_Exception('Cannot force login for unknown user :user', [':user' => $username]);
+            }
         }
 
         if ($mark_session_as_forced === TRUE)
