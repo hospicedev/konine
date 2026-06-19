@@ -4,41 +4,50 @@
 
 **Successor to Koseven · Successor to Kohana · Built on the CodeIgniter lineage**
 
-> *Keeping legacy applications alive until their time is done.*
+[![tests](https://github.com/hospicedev/konine/actions/workflows/tests.yml/badge.svg)](https://github.com/hospicedev/konine/actions/workflows/tests.yml)
+[![coverage](https://codecov.io/gh/hospicedev/konine/branch/master/graph/badge.svg)](https://codecov.io/gh/hospicedev/konine)
+[![PHP](https://img.shields.io/badge/PHP-%E2%89%A58.4-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![Latest release](https://img.shields.io/github/v/release/hospicedev/konine?label=release&color=blue)](https://github.com/hospicedev/konine/releases/latest)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE.md)
+[![Maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)](https://github.com/hospicedev/konine/graphs/commit-activity)
+
+> *Keeping legacy applications alive — and moving them forward.*
 
 ---
 
-## Project Status: Maintenance Mode
+## Project Status: Actively Maintained
 
-Konine exists as **end-of-life support** for existing Kohana/Koseven applications. It provides:
+Konine keeps existing Kohana/Koseven applications running on modern PHP. Its first duty is still stability for the applications that depend on it, so that work always comes first:
 
 - PHP 8.4 compatibility fixes
 - Security patches
 - Bug fixes for existing functionality
 
-**No new features will be added.** The goal is to keep the framework running until PHP 9 reaches end of life, or until the maintainers are no longer able to continue.
+Beyond that baseline, **Konine now accepts feature requests and implements requested enhancements** (for example response streaming and CSRF protection) where they benefit the community and do not destabilise existing applications. We are no longer strictly maintenance-only.
 
-If you are on Koseven or Kohana and need to stay on this stack while you plan a migration, Konine is for you.
+**All new features and functionality must be built in a backwards-compatible manner.** Existing applications must continue to work without changes; behaviour that could affect them is kept opt-in.
+
+If you are on Koseven or Kohana, Konine is a safe place to stay — and a place that can grow with you.
+
+To request an enhancement, [open a feature request](https://github.com/hospicedev/konine/issues/new?template=feature_request.md). We discuss scope on the issue before any code is written.
 
 ---
 
-## Looking to Start a New Project?
+## Considering Konine for a New Project?
 
-**Please look at [CodeIgniter](https://codeigniter.com/) first.**
+Konine is a stable HMVC framework in the Kohana tradition — strict OOP, HMVC, and the transparent extension system Kohana developers know well. It is a reasonable choice if that lineage is what you want.
 
-CodeIgniter is a lightweight PHP HMVC framework that shares much of the same spirit as Kohana — simple, fast, and opinionated. It is actively maintained, regularly updated, and has a healthy community. If you are evaluating frameworks for a new application and want something in the Kohana tradition, CodeIgniter is far better suited to that purpose than starting fresh on Konine.
-
-Konine is maintenance-only. It is not the right foundation for a new project.
+That said, [CodeIgniter](https://codeigniter.com/) shares much of the same spirit — simple, fast, and opinionated — and has a larger, more active community. If you are evaluating frameworks for a brand-new application and want the biggest ecosystem in this tradition, it is well worth a look alongside Konine.
 
 ---
 
 ## Goals & Motto
 
-**Goal:** Provide a stable, security-maintained path forward for existing Kohana and Koseven applications as PHP evolves — without abandoning the developers who built on this stack.
+**Goal:** Provide a stable, security-maintained, and actively improved path forward for existing Kohana and Koseven applications as PHP evolves — without abandoning the developers who built on this stack.
 
-**Motto:** *Keeping legacy applications alive until their time is done.*
+**Motto:** *Keeping legacy applications alive — and moving them forward.*
 
-We do not aim to compete with modern frameworks. We aim to give developers breathing room to migrate on their own terms, without being forced off a working stack before they are ready.
+We do not aim to compete with modern frameworks. We aim to give developers a working stack they can stay on, improve, and migrate from on their own terms.
 
 ---
 
@@ -60,7 +69,7 @@ When Kohana went end-of-life, a small group of developers refused to let it die.
 
 ### Konine
 
-Konine is the latest chapter — not a rebirth, but an honest acknowledgement that the work is not quite finished. As long as existing applications need it, we will be here.
+Konine is the latest chapter — carrying the framework forward for the applications and developers who still rely on it. As long as those applications need it, we will be here, keeping it stable and improving it where it helps.
 
 **To every developer who ever opened an issue, submitted a pull request, wrote documentation, answered a forum question, or simply used this framework and reported a bug: thank you. This community built something worth carrying forward.**
 
@@ -123,11 +132,11 @@ See the [documentation](https://konine.dev/documentation) for full setup instruc
 
 | Version | PHP Target | Status |
 |---------|-----------|--------|
-| 3.4.x   | PHP 8.4   | Active (maintenance only) |
+| 3.4.x   | PHP 8.4   | Actively maintained |
 
 Semantic versioning from 3.4.0 onward:
-- **Patch versions** (3.4.1, 3.4.2, ...) — security fixes and bug fixes only
-- **Minor versions** (3.5.0) — only if a future PHP version requires further compatibility work
+- **Patch versions** (3.4.1, 3.4.2, ...) — security fixes and bug fixes
+- **Minor versions** (3.5.0, ...) — requested enhancements, new features, and PHP compatibility work
 
 ---
 
@@ -137,6 +146,8 @@ Contributions are welcome for:
 - Security vulnerabilities
 - PHP compatibility bugs
 - Regressions from PHP version changes
+- Bug fixes for existing functionality
+- Enhancements and new features (please open a feature request first so scope can be agreed; all new functionality must be backwards compatible)
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
@@ -155,4 +166,5 @@ Konine is released under the [BSD-3-Clause license](LICENSE.md). You can use it 
 - **Website:** https://konine.dev
 - **GitHub:** https://github.com/hospicedev/konine
 - **Issues:** https://github.com/hospicedev/konine/issues
-- **CodeIgniter (recommended for new projects):** https://codeigniter.com/
+- **Feature requests:** https://github.com/hospicedev/konine/issues/new?template=feature_request.md
+- **CodeIgniter (a great option in the same lineage):** https://codeigniter.com/

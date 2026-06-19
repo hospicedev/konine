@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Konine** is the successor to Koseven, which was the successor to Kohana. It is a PHP 8.4+ HMVC framework.
 
-Koseven was archived on 2026-04-14. Konine exists as **end-of-life support** — maintenance and security fixes only. No new features. The goal is to keep the framework running until PHP 9 reaches end of life, or until the maintainers are no longer able to continue.
+Koseven was archived on 2026-04-14. Konine is an **actively maintained** continuation. Its first priority is stability for existing applications — PHP compatibility, security patches, and bug fixes always come first. Beyond that baseline, Konine also accepts feature requests and implements requested enhancements (for example response streaming and CSRF protection) when they benefit the community and do not destabilise existing applications. The framework will be maintained until PHP 9 reaches end of life, or until the maintainers are no longer able to continue.
 
 - **GitHub:** https://github.com/hospicedev/konine
 - **Website:** https://konine.dev
@@ -87,14 +87,19 @@ Core classes live in `system/classes/Kohana/`: Core, Request, Response, Route, C
 
 ## Scope of Changes
 
-Konine is maintenance-only. Changes must be limited to:
+Konine's first priority is the stability of existing applications. The bulk of work is:
 - PHP version compatibility fixes (deprecations, removed features, type changes)
 - Security patches
 - Bug fixes for existing functionality
 - CI/tooling updates
 - Documentation updates for the fork
 
-Do NOT add new features, refactor for style, or modernize patterns beyond what is required for PHP compatibility.
+In addition, **requested enhancements and new features are in scope** when they are tracked by a GitHub issue (typically a feature request) and the approach has been agreed there. When implementing a feature:
+- Confirm an issue exists describing the requested behaviour, and reference it in the PR.
+- **All new features and functionality MUST be built in a backwards-compatible manner.** Existing applications must continue to work unchanged; do not alter or remove existing public behaviour, signatures, or defaults.
+- Keep new functionality opt-in where it could change existing behaviour.
+
+Do NOT make speculative feature additions, large refactors for style, or pattern modernisation that is not tied to a tracked request.
 
 ## Git Workflow
 
@@ -120,8 +125,18 @@ git remote add upstream https://github.com/koseven/koseven.git
 git fetch upstream
 ```
 
+### Security Review (mandatory before every PR)
+
+A security review is **required** before any pull request is opened -- no PR may be created until it has been completed. This applies to all changes, including documentation, since docs can introduce malicious links, leaked secrets, or misleading guidance.
+
+- Run the review against the full branch diff (`git diff master...HEAD`), not just the latest commit.
+- Use the `/security-review` skill (or the **security-reviewer** agent) to scan for: hardcoded secrets or credentials, unvalidated user input, injection (SQL, command, path), XSS / output-escaping gaps, insecure crypto, CSRF exposure, and any leakage of sensitive data in errors or logs.
+- Resolve all **CRITICAL** and **HIGH** findings before opening the PR. Document any accepted **MEDIUM**/**LOW** findings in the PR description with justification.
+- Record that the review was performed in the PR description (e.g. a "Security review: completed, no findings" note).
+
 ### Pull Requests
 
+- **A security review (above) must be completed before the PR is created.**
 - PRs target `master`
 - All changes require a PR -- no direct pushes to `master`
 - PR descriptions should reference the relevant GitHub issue (e.g. `Refs #2`)
@@ -132,7 +147,7 @@ git fetch upstream
 Semantic versioning from 3.4.0 onward:
 - **3.4.x** -- PHP 8.4 compatibility release (current)
 - **Patch versions** (3.4.1, 3.4.2) -- security fixes, bug fixes
-- **Minor versions** (3.5.0) -- if future PHP versions require further compatibility work
+- **Minor versions** (3.5.0) -- requested enhancements, new features, or further PHP compatibility work
 
 ### Commit Messages
 

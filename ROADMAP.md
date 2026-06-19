@@ -1,15 +1,18 @@
 # Konine Roadmap
 
-Konine is in **maintenance mode only**. No new features will be added.
+Konine is **actively maintained**. Stability for existing applications comes first, and the project also accepts feature requests and implements requested enhancements.
 
 ## Scope of Work
 
-All ongoing work is limited to:
+Ongoing work covers:
 - PHP version compatibility fixes (deprecations, removed functions, type changes)
 - Security patches
 - Bug fixes for existing functionality
 - CI/tooling updates
 - Documentation updates
+- Requested enhancements and new features, tracked via GitHub issues
+
+Stability is the priority: **all enhancements and new features must be built in a backwards-compatible manner.** Existing applications must continue to work without changes, and new behaviour is kept opt-in where it could affect them.
 
 ## Version Plan
 
@@ -22,23 +25,30 @@ Branched from Koseven 3.3.10. The primary goal is to ensure the framework runs c
 - Upgrade dev dependencies (PHPUnit, etc.) for PHP 8.x compatibility
 - Security patches as needed
 
-**Patch versions** (3.4.1, 3.4.2, ...) are released for security fixes and bug fixes only.
+**Patch versions** (3.4.1, 3.4.2, ...) are released for security fixes and bug fixes.
 
 ### Future Minor Versions
 
-A new minor version (e.g. 3.5.0) will only be created if a future PHP version introduces breaking changes that require further compatibility work. There is no scheduled release.
+A new minor version (e.g. 3.5.0) is cut when requested enhancements or new features are ready to ship, or when a future PHP version introduces breaking changes that require further compatibility work.
 
-### End of Life
+## Planned & Requested Enhancements
+
+These have been requested and are candidates for an upcoming minor release. Track and discuss them on the issue tracker:
+
+- **Response streaming** — stream `Response` output rather than buffering it in full.
+- **CSRF protection** — first-class cross-site request forgery protection helpers.
+
+Have a request? [Open a feature request](https://github.com/hospicedev/konine/issues/new?template=feature_request.md) and we will discuss scope before any code is written.
+
+## End of Life
 
 Konine will be maintained until:
 - PHP 9 reaches end of life, **or**
 - The maintainers are no longer able to continue
 
-There will be no major feature releases or architectural changes.
-
 ## Tracked Work
 
-For open issues and planned fixes, see:
+For open issues and planned work, see:
 https://github.com/hospicedev/konine/issues
 
 The main tracking issue for the PHP 8.x compatibility work is:
