@@ -125,8 +125,18 @@ git remote add upstream https://github.com/koseven/koseven.git
 git fetch upstream
 ```
 
+### Security Review (mandatory before every PR)
+
+A security review is **required** before any pull request is opened -- no PR may be created until it has been completed. This applies to all changes, including documentation, since docs can introduce malicious links, leaked secrets, or misleading guidance.
+
+- Run the review against the full branch diff (`git diff master...HEAD`), not just the latest commit.
+- Use the `/security-review` skill (or the **security-reviewer** agent) to scan for: hardcoded secrets or credentials, unvalidated user input, injection (SQL, command, path), XSS / output-escaping gaps, insecure crypto, CSRF exposure, and any leakage of sensitive data in errors or logs.
+- Resolve all **CRITICAL** and **HIGH** findings before opening the PR. Document any accepted **MEDIUM**/**LOW** findings in the PR description with justification.
+- Record that the review was performed in the PR description (e.g. a "Security review: completed, no findings" note).
+
 ### Pull Requests
 
+- **A security review (above) must be completed before the PR is created.**
 - PRs target `master`
 - All changes require a PR -- no direct pushes to `master`
 - PR descriptions should reference the relevant GitHub issue (e.g. `Refs #2`)
