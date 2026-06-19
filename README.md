@@ -4,6 +4,13 @@
 
 **Successor to Koseven · Successor to Kohana · Built on the CodeIgniter lineage**
 
+[![tests](https://github.com/hospicedev/konine/actions/workflows/tests.yml/badge.svg)](https://github.com/hospicedev/konine/actions/workflows/tests.yml)
+[![coverage](https://codecov.io/gh/hospicedev/konine/branch/master/graph/badge.svg)](https://codecov.io/gh/hospicedev/konine)
+[![PHP](https://img.shields.io/badge/PHP-%E2%89%A58.4-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![Latest release](https://img.shields.io/github/v/release/hospicedev/konine?label=release&color=blue)](https://github.com/hospicedev/konine/releases/latest)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE.md)
+[![Maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)](https://github.com/hospicedev/konine/graphs/commit-activity)
+
 > *Keeping legacy applications alive — and moving them forward.*
 
 ---
