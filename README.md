@@ -18,6 +18,8 @@ Konine keeps existing Kohana/Koseven applications running on modern PHP. Its fir
 
 Beyond that baseline, **Konine now accepts feature requests and implements requested enhancements** (for example response streaming and CSRF protection) where they benefit the community and do not destabilise existing applications. We are no longer strictly maintenance-only.
 
+**All new features and functionality must be built in a backwards-compatible manner.** Existing applications must continue to work without changes; behaviour that could affect them is kept opt-in.
+
 If you are on Koseven or Kohana, Konine is a safe place to stay — and a place that can grow with you.
 
 To request an enhancement, [open a feature request](https://github.com/hospicedev/konine/issues/new?template=feature_request.md). We discuss scope on the issue before any code is written.
@@ -138,7 +140,7 @@ Contributions are welcome for:
 - PHP compatibility bugs
 - Regressions from PHP version changes
 - Bug fixes for existing functionality
-- Enhancements and new features (please open a feature request first so scope can be agreed)
+- Enhancements and new features (please open a feature request first so scope can be agreed; all new functionality must be backwards compatible)
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
