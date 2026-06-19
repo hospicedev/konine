@@ -12,7 +12,7 @@ Ongoing work covers:
 - Documentation updates
 - Requested enhancements and new features, tracked via GitHub issues
 
-Stability is the priority: enhancements are added in a way that aims to be backwards compatible and to keep new behaviour opt-in where it could affect existing applications.
+Stability is the priority: **all enhancements and new features must be built in a backwards-compatible manner.** Existing applications must continue to work without changes, and new behaviour is kept opt-in where it could affect them.
 
 ## Version Plan
 
