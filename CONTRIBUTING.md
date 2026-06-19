@@ -1,11 +1,13 @@
 # Contributing to Konine
 
-Konine is in **maintenance mode** — contributions are accepted for:
+Konine is **actively maintained**. Stability for existing applications comes first, but contributions are welcome across a broad range:
 - Security vulnerabilities
 - PHP version compatibility bugs (deprecated or removed functionality)
 - Regressions in existing functionality
+- Bug fixes for existing functionality
+- Enhancements and new features
 
-**New features and refactors are out of scope.** Please open an issue before submitting a pull request so the scope can be confirmed.
+**Please open an issue before submitting a pull request** so the scope can be confirmed. For new features, [open a feature request](https://github.com/hospicedev/konine/issues/new?template=feature_request.md) and we will agree the approach on the issue before any code is written. We would rather discuss a change first than reject a PR after effort has been spent.
 
 ---
 
@@ -16,7 +18,7 @@ git clone git@github.com:hospicedev/konine.git
 cd konine
 ```
 
-The default branch is `master`. All fixes branch from `master` and merge back via PR.
+The default branch is `master`. All changes branch from `master` and merge back via PR.
 
 ## GitHub CLI Setup
 
@@ -29,14 +31,14 @@ gh repo set-default hospicedev/konine
 ## Making Changes
 
 ```bash
-git checkout -b fix/description-of-fix
+git checkout -b fix/description-of-change
 # ... make your changes ...
 git status
 git add path/to/changed/file.php
-git commit -m 'fix: description of fix
+git commit -m 'fix: description of change
 
 Refs #<issue-number>'
-git push origin fix/description-of-fix
+git push origin fix/description-of-change
 ```
 
 Then open a pull request against `master` at https://github.com/hospicedev/konine.
@@ -45,12 +47,16 @@ Then open a pull request against `master` at https://github.com/hospicedev/konin
 
 - All PRs must reference a GitHub issue (e.g. `Refs #12`)
 - Keep PRs focused — one concern per PR
-- All changes must be tested via the unit test suite
-- Fix the issue, not surrounding style
+- All changes must be covered by the unit test suite where practical
+- New features should be backwards compatible and keep new behaviour opt-in where it could affect existing applications
 
 ## Bug Fixes
 
 Open an issue first with as much detail as possible. Then submit a PR referencing that issue.
+
+## Feature Requests
+
+Open a feature request describing the problem and the behaviour you would like. Once the approach is agreed on the issue, a PR referencing it can be submitted.
 
 ## Tagging Releases
 
