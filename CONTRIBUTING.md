@@ -48,7 +48,7 @@ Then open a pull request against `master` at https://github.com/hospicedev/konin
 - All PRs must reference a GitHub issue (e.g. `Refs #12`)
 - Keep PRs focused — one concern per PR
 - All changes must be covered by the unit test suite where practical
-- New features should be backwards compatible and keep new behaviour opt-in where it could affect existing applications
+- **All new features and functionality must be built in a backwards-compatible manner** — existing applications must continue to work unchanged, and new behaviour must be kept opt-in where it could affect them
 
 ## Bug Fixes
 
