@@ -96,7 +96,7 @@ Konine's first priority is the stability of existing applications. The bulk of w
 
 In addition, **requested enhancements and new features are in scope** when they are tracked by a GitHub issue (typically a feature request) and the approach has been agreed there. When implementing a feature:
 - Confirm an issue exists describing the requested behaviour, and reference it in the PR.
-- Prefer changes that are backwards compatible and do not destabilise existing applications.
+- **All new features and functionality MUST be built in a backwards-compatible manner.** Existing applications must continue to work unchanged; do not alter or remove existing public behaviour, signatures, or defaults.
 - Keep new functionality opt-in where it could change existing behaviour.
 
 Do NOT make speculative feature additions, large refactors for style, or pattern modernisation that is not tied to a tracked request.
