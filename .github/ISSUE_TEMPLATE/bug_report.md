@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a bug report to help us improve koseven
+about: Create a bug report to help us improve Konine
 title: ''
 labels: ''
 assignees: ''
@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is, what version of koseven you are running, etc.
+A clear and concise description of what the bug is, what version of Konine you are running, etc.
 
 **To Reproduce**
 Steps to reproduce the behavior:
