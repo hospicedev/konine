@@ -10,7 +10,8 @@
  */
 function _ord($chr)
 {
-	$ord0 = ord($chr);
+	$chr = (string) $chr;
+	$ord0 = isset($chr[0]) ? ord($chr[0]) : 0;
 
 	if ($ord0 >= 0 AND $ord0 <= 127)
 		return $ord0;

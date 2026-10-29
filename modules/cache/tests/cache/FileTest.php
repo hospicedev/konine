@@ -312,11 +312,8 @@ class Kohana_Cache_FileTest extends Kohana_CacheBasicMethodsTest {
 		$cache = $this->cache();
 
 		$method_sanitize_id = new ReflectionMethod($cache, '_sanitize_id');
-		$method_sanitize_id->setAccessible(TRUE);
 		$method_filename = new ReflectionMethod($cache, 'filename');
-		$method_filename->setAccessible(TRUE);
 		$method_resolve_directory = new ReflectionMethod($cache, '_resolve_directory');
-		$method_resolve_directory->setAccessible(TRUE);
 
 		$sanitized_id = $method_sanitize_id->invoke($cache, $id);
 		$filename = $method_filename->invoke($cache, $sanitized_id);

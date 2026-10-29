@@ -104,9 +104,6 @@ class Kohana_Request_Client_Curl extends Request_Client_External {
 			$error = curl_error($curl);
 		}
 
-		// Close the connection
-		curl_close($curl);
-
 		if (isset($error))
 		{
 			throw new Request_Exception('Error fetching remote :url [ status :code ] :error',

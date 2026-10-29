@@ -10,7 +10,7 @@ Koseven was archived on 2026-04-14. Konine is an **actively maintained** continu
 
 - **GitHub:** https://github.com/hospicedev/konine
 - **Website:** https://konine.dev
-- **PHP version:** >=8.4
+- **PHP version:** >=8.4 (tested on 8.4 and 8.5)
 - **Current version:** 3.4.0 (released 2026-04-15, tagged `v3.4.0`)
 - **License:** BSD-3-Clause
 - **Lineage:** Kohana 3.3.x -> Koseven 3.3.x -> Konine 3.4.x
@@ -154,6 +154,7 @@ A security review is **required** before any pull request is opened -- no PR may
 
 Semantic versioning from 3.4.0 onward:
 - **3.4.x** -- PHP 8.4 compatibility release (current)
+- **3.5.x** -- PHP 8.5 support, minimum stays PHP 8.4 (in development, #17)
 - **Patch versions** (3.4.1, 3.4.2) -- security fixes, bug fixes. Tagged from `3.4.x` if it exists, otherwise from `master`
 - **Minor versions** (3.5.0) -- requested enhancements, new features, deprecations, or further PHP compatibility work. Tagged from `master`
 
@@ -176,7 +177,7 @@ Tests use PHPUnit `^10.5` bootstrapped via `modules/unittest/bootstrap.php`.
 - Test files live in `system/tests/` and `modules/*/tests/`
 - Test suite is defined in `phpunit.xml` at the project root
 - CI runs on push and PR via `.github/workflows/tests.yml`
-- CI matrix targets PHP 8.4
+- CI matrix targets PHP 8.4 and 8.5
 
 ### Running Tests Locally
 

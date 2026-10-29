@@ -199,7 +199,6 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 			$reflection = $reflection->getParentClass();
 		}
 		$prop = $reflection->getProperty($property);
-		$prop->setAccessible(true);
 		return $prop->getValue($object);
 	}
 
@@ -213,7 +212,6 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 			$reflection = $reflection->getParentClass();
 		}
 		$prop = $reflection->getProperty($attribute);
-		$prop->setAccessible(true);
 		static::assertSame($expected, $prop->getValue($object), $message);
 	}
 
@@ -227,7 +225,6 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 			$reflection = $reflection->getParentClass();
 		}
 		$prop = $reflection->getProperty($attribute);
-		$prop->setAccessible(true);
 		static::assertNotSame($expected, $prop->getValue($object), $message);
 	}
 
@@ -242,7 +239,6 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 			$reflection = $reflection->getParentClass();
 		}
 		$prop = $reflection->getProperty($attribute);
-		$prop->setAccessible(true);
 		$value = $prop->getValue($object);
 		if (is_string($value)) {
 			static::assertStringContainsString((string) $needle, $value, $message);
@@ -262,7 +258,6 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 			$reflection = $reflection->getParentClass();
 		}
 		$prop = $reflection->getProperty($attribute);
-		$prop->setAccessible(true);
 		$value = $prop->getValue($object);
 		if (is_string($value)) {
 			static::assertStringNotContainsString((string) $needle, $value, $message);
@@ -283,7 +278,6 @@ abstract class Kohana_Unittest_TestCase extends TestCase implements Test {
 			$reflection = $reflection->getParentClass();
 		}
 		$prop = $reflection->getProperty($attribute);
-		$prop->setAccessible(true);
 		// Static properties require null; instance properties need the object
 		return $prop->isStatic() ? $prop->getValue(null) : $prop->getValue($object);
 	}

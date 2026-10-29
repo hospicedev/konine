@@ -19,7 +19,7 @@
 
 Konine keeps existing Kohana/Koseven applications running on modern PHP. Its first duty is still stability for the applications that depend on it, so that work always comes first:
 
-- PHP 8.4 compatibility fixes
+- PHP 8.4 and 8.5 compatibility fixes
 - Security patches
 - Bug fixes for existing functionality
 
@@ -77,7 +77,7 @@ Konine is the latest chapter — carrying the framework forward for the applicat
 
 ## Requirements
 
-- PHP >= 8.4
+- PHP >= 8.4 (tested on PHP 8.4 and 8.5)
 - A web server (Apache, Nginx, etc.)
 - `ext-mbstring` enabled
 
@@ -138,6 +138,7 @@ See the [documentation](https://konine.dev/documentation) for full setup instruc
 
 | Version | PHP Target | Status |
 |---------|-----------|--------|
+| 3.5.x   | PHP 8.4, 8.5 | In development |
 | 3.4.x   | PHP 8.4   | Actively maintained |
 
 Semantic versioning from 3.4.0 onward:
