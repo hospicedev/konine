@@ -29,8 +29,8 @@ class Kohana_Database_Result_CachedTest extends Unittest_TestCase
 	 * PHP 8.1+ raises E_DEPRECATED when the class is linked, which
 	 * Kohana::error_handler() turns into a fatal error under E_ALL.
 	 *
-	 * Runs in a separate process because the unittest bootstrap masks
-	 * E_DEPRECATED and the class may already be loaded by other tests.
+	 * Runs in a separate process because the class may already be loaded by
+	 * other tests.
 	 *
 	 * @test
 	 * @runInSeparateProcess

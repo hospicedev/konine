@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<files version="1">
+ <file path="system/classes/Kohana/Arr.php">
+  <line number="130" hash="107d79b801a26c6bc7dd8dac98221273b6d36626">
+   <issue><![CDATA[ctype_digit(): Argument of type int will be interpreted as string in the future]]></issue>
+  </line>
+ </file>
+ <file path="modules/unittest/classes/Kohana/Unittest/TestCase.php">
+  <line number="216" hash="0d82d31cfc0dcfe4122fabd8bc779cc8f1f1de38">
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+  <line number="245" hash="0d82d31cfc0dcfe4122fabd8bc779cc8f1f1de38">
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+  <line number="265" hash="0d82d31cfc0dcfe4122fabd8bc779cc8f1f1de38">
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+  <line number="286" hash="0d82d31cfc0dcfe4122fabd8bc779cc8f1f1de38">
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+  <line number="230" hash="0d82d31cfc0dcfe4122fabd8bc779cc8f1f1de38">
+   <issue><![CDATA[Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+ </file>
+ <file path="system/tests/kohana/CoreTest.php">
+  <line number="273" hash="c430bb9b6c8a56f573a51f635c9991407c32be73">
+   <issue><![CDATA[Deprecation forwarded to PHPUnit]]></issue>
+  </line>
+ </file>
+ <file path="system/classes/Kohana/Date.php">
+  <line number="71" hash="86070b3f2edc5efbb8aaea1515f91105374edda4">
+   <issue><![CDATA[DateTime::__construct(): Passing null to parameter #1 ($datetime) of type string is deprecated]]></issue>
+  </line>
+  <line number="72" hash="e347c54c0c22cf63f42a6223eaedba72f10255ec">
+   <issue><![CDATA[DateTime::__construct(): Passing null to parameter #1 ($datetime) of type string is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="system/classes/Kohana/Text.php">
+  <line number="486" hash="b01fc4000fbbd03d5200ecf70683d4435a521378">
+   <issue><![CDATA[strpos(): Passing null to parameter #1 ($haystack) of type string is deprecated]]></issue>
+   <issue><![CDATA[strpos(): Passing null to parameter #1 ($haystack) of type string is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="system/classes/Kohana/URL.php">
+  <line number="70" hash="56f0255ade9281177dc9890bf0e19adc0cebb84d">
+   <issue><![CDATA[parse_url(): Passing null to parameter #1 ($url) of type string is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="system/utf8/ord.php">
+  <line number="13" hash="93156156d59065cfee67493b8a968afcb086b54b">
+   <issue><![CDATA[ord(): Providing a string that is not one byte long is deprecated. Use ord($str[0]) instead]]></issue>
+   <issue><![CDATA[ord(): Providing a string that is not one byte long is deprecated. Use ord($str[0]) instead]]></issue>
+  </line>
+ </file>
+ <file path="system/classes/Kohana/Valid.php">
+  <line number="393" hash="592c8ad8684e8b6b8bc93aea93695c5e421f524b">
+   <issue><![CDATA[ctype_alnum(): Argument of type null will be interpreted as string in the future]]></issue>
+   <issue><![CDATA[ctype_alnum(): Argument of type bool will be interpreted as string in the future]]></issue>
+  </line>
+  <line number="415" hash="347913872bfed2ac9335cf04af58a8c516360b06">
+   <issue><![CDATA[preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated]]></issue>
+   <issue><![CDATA[preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated]]></issue>
+  </line>
+  <line number="354" hash="50afbc09e700cce722d5e6a1ba6d1d86f696351b">
+   <issue><![CDATA[strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated]]></issue>
+  </line>
+  <line number="513" hash="43bd5fef5d4eed27c8c7e8ad19d399c0b29266d4">
+   <issue><![CDATA[preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated]]></issue>
+  </line>
+  <line number="433" hash="00e1e95d9242cce103b23b3292c2bf057d6fa65b">
+   <issue><![CDATA[ctype_digit(): Argument of type int will be interpreted as string in the future]]></issue>
+   <issue><![CDATA[ctype_digit(): Argument of type null will be interpreted as string in the future]]></issue>
+   <issue><![CDATA[ctype_digit(): Argument of type bool will be interpreted as string in the future]]></issue>
+  </line>
+  <line number="429" hash="658f310231cf044121e41bd40e72f115f37b025a">
+   <issue><![CDATA[preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated]]></issue>
+  </line>
+  <line number="526" hash="393bd138a65cd5ac0063e5a8acf7a66071ea8488">
+   <issue><![CDATA[preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated]]></issue>
+  </line>
+  <line number="235" hash="5ddb085e45cba8fe2df218abf9b2c39042409dc9">
+   <issue><![CDATA[preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated]]></issue>
+  </line>
+  <line number="340" hash="6c5060bd2ded44f5b30da2f6789823b9a08406fc">
+   <issue><![CDATA[preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated]]></issue>
+  </line>
+  <line number="153" hash="971e4c1bf7f15fad4c92fd268201dde254b2f83c">
+   <issue><![CDATA[preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="system/classes/Kohana/UTF8.php">
+  <line number="174" hash="c9fbaf55a785552e99714c0d22ae477a497a0e61">
+   <issue><![CDATA[mb_strlen(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[mb_strlen(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[mb_strlen(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[mb_strlen(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="system/classes/Kohana/Validation.php">
+  <line number="549" hash="24c681b7986a455356d5e28972adb64fdb8fdffe">
+   <issue><![CDATA[Using null as an array offset is deprecated, use an empty string instead]]></issue>
+  </line>
+ </file>
+ <file path="modules/cache/tests/cache/CacheTest.php">
+  <line number="216" hash="d9b89fe70d2eac5cbac1311b7b568dfd85eae2dc">
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+ </file>
+ <file path="modules/cache/tests/cache/FileTest.php">
+  <line number="315" hash="b238600c68d213b16ea1a996879bd3ff74664ac6">
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+  <line number="317" hash="22ed7337ef72ab74cd844b7014f8a8fbbdef5c7f">
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+  <line number="319" hash="ba0f39f02fb8931e6299670c6296537be97e0577">
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+   <issue><![CDATA[Method ReflectionMethod::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1]]></issue>
+  </line>
+ </file>
+ <file path="modules/cache/classes/Kohana/HTTP/Cache.php">
+  <line number="74" hash="95d7861bef78fb861aeb4b050726e658ccbb1dd7">
+   <issue><![CDATA[http_build_query(): Passing null to parameter #2 ($numeric_prefix) of type string is deprecated]]></issue>
+   <issue><![CDATA[http_build_query(): Passing null to parameter #2 ($numeric_prefix) of type string is deprecated]]></issue>
+   <issue><![CDATA[http_build_query(): Passing null to parameter #2 ($numeric_prefix) of type string is deprecated]]></issue>
+   <issue><![CDATA[http_build_query(): Passing null to parameter #2 ($numeric_prefix) of type string is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="modules/image/classes/Kohana/Image/GD.php">
+  <line number="133" hash="a526295942076c5a20345a828467c5b09e9730fb">
+   <issue><![CDATA[Function imagedestroy() is deprecated since 8.5, as it has no effect since PHP 8.0]]></issue>
+  </line>
+ </file>
+ <file path="modules/userguide/classes/Kohana/Kodoc.php">
+  <line number="337" hash="2d13baa769349737c03ae0cc4d1889fa9366705e">
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+   <issue><![CDATA[trim(): Passing null to parameter #1 ($string) of type string is deprecated]]></issue>
+  </line>
+ </file>
+</files>
