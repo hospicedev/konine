@@ -483,7 +483,7 @@ class Kohana_Text {
 		$format = ($format === NULL) ? '%01.2f %s' : (string) $format;
 
 		// IEC prefixes (binary)
-		if ($si == FALSE OR strpos($force_unit, 'i') !== FALSE)
+		if ($si == FALSE OR strpos( (string) $force_unit, 'i') !== FALSE)
 		{
 			$units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
 			$mod   = 1024;
