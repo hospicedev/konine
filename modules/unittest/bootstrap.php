@@ -53,7 +53,7 @@ define('DOCROOT', realpath(__DIR__.'/../../').DIRECTORY_SEPARATOR);
  * When using a legacy application, it is recommended to disable deprecated
  * notices. Disable with: E_ALL & ~E_DEPRECATED
  */
-error_reporting(E_ALL & ~E_DEPRECATED);
+error_reporting(E_ALL);
 
 /**
  * End of standard configuration! Changing any of the code below should only be
@@ -137,3 +137,40 @@ foreach ($modules_iterator as $module)
 Kohana::modules($modules);
 
 unset($modules_iterator, $modules, $module);
+
+/**
+ * Report PHP deprecations to PHPUnit instead of throwing them.
+ *
+ * Kohana::init() registers Kohana::error_handler(), which turns every error
+ * into an ErrorException. PHPUnit only installs its own error handler when
+ * no other handler is active, so it never sees deprecations. Forward those
+ * to PHPUnit while a test is running, so they are listed, can be recorded in
+ * the baseline (phpunit-baseline.xml) and fail the run when new. All other
+ * errors, and deprecations outside a test, go to the previous handler, as
+ * they do in an application.
+ *
+ * Regenerate the baseline on the newest supported PHP version, which reports
+ * the most deprecations, with:
+ *
+ *     vendor/bin/phpunit --generate-baseline phpunit-baseline.xml
+ */
+$previous = set_error_handler(function ($code, $error, $file, $line) use (&$previous)
+{
+	if (($code & (E_DEPRECATED | E_USER_DEPRECATED)) AND (error_reporting() & $code)
+		AND class_exists('PHPUnit\Runner\ErrorHandler'))
+	{
+		try
+		{
+			PHPUnit\Runner\ErrorHandler::instance()($code, $error, $file, $line);
+
+			return TRUE;
+		}
+		catch (PHPUnit\Event\Code\NoTestCaseObjectOnCallStackException $e)
+		{
+			// Loading a test file, a data provider or setUpBeforeClass()
+		}
+	}
+
+	// Without a previous handler, PHP's own error handling continues
+	return $previous ? $previous($code, $error, $file, $line) : FALSE;
+});

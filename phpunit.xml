@@ -3,6 +3,8 @@
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
         bootstrap="modules/unittest/bootstrap.php"
         beStrictAboutOutputDuringTests="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        failOnDeprecation="true"
         stopOnFailure="false"
         cacheDirectory=".phpunit.cache">
     <testsuite name="default">
@@ -20,7 +22,7 @@
         <junit outputFile="build/logs/junit.xml"/>
     </logging>
 
-    <source>
+    <source baseline="phpunit-baseline.xml">
         <include>
             <directory suffix=".php">./application/classes</directory>
             <directory suffix=".php">./modules/*/classes</directory>

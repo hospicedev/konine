@@ -260,6 +260,22 @@ class Kohana_CoreTest extends Unittest_TestCase
 	}
 
 	/**
+	 * Deprecations must reach PHPUnit (see modules/unittest/bootstrap.php),
+	 * so new ones fail the suite. This fails if E_DEPRECATED is masked again,
+	 * or if Kohana::error_handler() turns the deprecation into an exception.
+	 * IgnoreDeprecations keeps the expected deprecation from failing the run.
+	 */
+	#[PHPUnit\Framework\Attributes\IgnoreDeprecations]
+	public function test_deprecations_reach_phpunit_instead_of_throwing()
+	{
+		$this->assertSame(E_DEPRECATED, error_reporting() & E_DEPRECATED);
+
+		trigger_error('Deprecation forwarded to PHPUnit', E_USER_DEPRECATED);
+
+		$this->assertTrue(TRUE);
+	}
+
+	/**
 	 * Provides test data for test_modules_sets_and_returns_valid_modules()
 	 *
 	 * @return array
