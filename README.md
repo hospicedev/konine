@@ -103,9 +103,9 @@ If you have an existing project on Koseven or Kohana, you can pull Konine's chan
 # Add Konine as a remote
 git remote add konine https://github.com/hospicedev/konine.git
 
-# Fetch a release tag (replace v3.4.0 with the latest release). Fetching
+# Fetch a release tag (replace v3.4.1 with the latest release). Fetching
 # the single tag into FETCH_HEAD avoids clashing with your own tags.
-git fetch konine --no-tags refs/tags/v3.4.0
+git fetch konine --no-tags refs/tags/v3.4.1
 
 # Merge into your current branch
 git merge FETCH_HEAD --allow-unrelated-histories
@@ -116,9 +116,9 @@ Resolve any merge conflicts — in general, keep your application code and favou
 To pull future releases once the remote is set up, merge a release tag:
 
 ```bash
-# Replace v3.4.0 with the release you want. Fetching the single tag into
+# Replace v3.4.1 with the release you want. Fetching the single tag into
 # FETCH_HEAD avoids clashing with your application's own tags.
-git fetch konine --no-tags refs/tags/v3.4.0
+git fetch konine --no-tags refs/tags/v3.4.1
 git merge FETCH_HEAD
 ```
 
