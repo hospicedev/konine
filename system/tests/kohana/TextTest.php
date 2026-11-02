@@ -113,6 +113,8 @@ class Kohana_TextTest extends Unittest_TestCase
 	{
 		return [
 			['', '', 100, NULL],
+			[NULL, NULL, 100, NULL],
+			['   ', '   ', 100, NULL],
 			['…', 'The rain in spain', -10, NULL],
 			['The rain…', 'The rain in spain', 2, NULL],
 			['The rain...', 'The rain in spain', 2, '...'],
@@ -138,6 +140,9 @@ class Kohana_TextTest extends Unittest_TestCase
 	{
 		return [
 			['', '', 100, NULL, FALSE],
+			[NULL, NULL, 100, NULL, FALSE],
+			[NULL, NULL, 100, NULL, TRUE],
+			['   ', '   ', 100, NULL, FALSE],
 			['…', 'BOO!', -42, NULL, FALSE],
 			['making php bet…', 'making php better for the sane', 14, NULL, FALSE],
 			['Garçon! Un café s.v.p.', 'Garçon! Un café s.v.p.', 50, '__', FALSE],
@@ -159,6 +164,43 @@ class Kohana_TextTest extends Unittest_TestCase
 	function test_limit_chars($expected, $str, $limit, $end_char, $preserve_words)
 	{
 		$this->assertSame($expected, Text::limit_chars($str, $limit, $end_char, $preserve_words));
+	}
+
+	/**
+	 * NULL input must not reach trim(): passing NULL to it is deprecated since
+	 * PHP 8.1, and Kohana::error_handler() turns the deprecation into an
+	 * exception under E_ALL.
+	 *
+	 * @test
+	 * @covers Text::limit_words
+	 * @covers Text::limit_chars
+	 * @see https://github.com/hospicedev/konine/issues/39
+	 */
+	public function test_limit_null_input_raises_no_deprecations()
+	{
+		$deprecations = [];
+
+		$error_level = error_reporting(E_ALL);
+
+		set_error_handler(function ($code, $error, $file, $line) use (&$deprecations) {
+			$deprecations[] = $error.' in '.$file.':'.$line;
+
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$this->assertNull(Text::limit_words(NULL, 10));
+			$this->assertNull(Text::limit_chars(NULL, 255, '...', TRUE));
+		}
+		finally
+		{
+			restore_error_handler();
+
+			error_reporting($error_level);
+		}
+
+		$this->assertSame([], $deprecations);
 	}
 
 	/**
