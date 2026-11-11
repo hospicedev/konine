@@ -73,15 +73,27 @@ class Kohana_Cache_File extends Cache implements Cache_GarbageCollect {
 	 */
 	protected function _check_cache_dir()
 	{
-		try
+		$directory = Arr::get($this->_config, 'cache_dir', Kohana::$cache_dir);
+
+		// SplFileInfo does not fail for missing paths, so create the directory
+		// explicitly, with the same permissions Kohana::init() uses
+		if ( ! file_exists($directory))
 		{
-			$directory = Arr::get($this->_config, 'cache_dir', Kohana::$cache_dir);
-			$this->_cache_dir = new SplFileInfo($directory);
+			try
+			{
+				$this->_make_directory($directory, 0755, TRUE);
+			}
+			catch (ErrorException | Cache_Exception $e)
+			{
+				// Another process may have created it in the meantime
+				if ( ! is_dir($directory))
+				{
+					throw new Cache_Exception('Failed to create the defined cache directory : :directory', [':directory' => $directory]);
+				}
+			}
 		}
-		catch (UnexpectedValueException $e)
-		{
-			$this->_cache_dir = $this->_make_directory($directory, 0777, TRUE);
-		}
+
+		$this->_cache_dir = new SplFileInfo($directory);
 
 		// If the defined directory is a file, get outta here
 		if ($this->_cache_dir->isFile())
@@ -317,7 +329,8 @@ class Kohana_Cache_File extends Cache implements Cache_GarbageCollect {
 				try
 				{
 					// Handle ignore files
-					if (in_array($file->getFilename(), $this->config('ignore_on_delete')))
+					// ignore_on_delete is optional config
+					if (in_array($file->getFilename(), (array) $this->config('ignore_on_delete')))
 					{
 						$delete = FALSE;
 					}

@@ -72,6 +72,173 @@ class Kohana_Cache_FileTest extends Kohana_CacheBasicMethodsTest {
 	}
 
 	/**
+	 * delete_all() must not fail when the optional ignore_on_delete config
+	 * is missing. On PHP 8, in_array() with a NULL haystack is a TypeError.
+	 *
+	 * @test
+	 * @see https://github.com/hospicedev/konine/issues/13
+	 */
+	public function test_delete_all_without_ignore_on_delete()
+	{
+		$directory = $this->temp_cache_dir();
+		mkdir($directory, 0755);
+
+		$cache = $this->file_cache(['cache_dir' => $directory]);
+		$cache->set('foo', 'bar');
+
+		$this->assertTrue($cache->delete_all());
+		$this->assertNull($cache->get('foo'));
+	}
+
+	/**
+	 * A missing cache directory is created on first use, as documented, with
+	 * the same 0755 permissions Kohana::init() uses for its cache directory.
+	 *
+	 * @test
+	 * @see https://github.com/hospicedev/konine/issues/13
+	 */
+	public function test_creates_missing_cache_dir()
+	{
+		$directory = $this->temp_cache_dir().DIRECTORY_SEPARATOR.'nested'.DIRECTORY_SEPARATOR.'cache';
+
+		$cache = $this->file_cache(['cache_dir' => $directory]);
+
+		$this->assertFalse(is_dir($directory));
+		$this->assertTrue($cache->set('foo', 'bar'));
+		$this->assertTrue(is_dir($directory));
+		$this->assertSame('bar', $cache->get('foo'));
+
+		if (DIRECTORY_SEPARATOR === '/')
+		{
+			$this->assertSame(0755, fileperms($directory) & 0777);
+		}
+	}
+
+	/**
+	 * An existing cache directory must be used as-is, with its permissions
+	 * left untouched.
+	 *
+	 * @test
+	 */
+	public function test_existing_cache_dir_permissions_unchanged()
+	{
+		$directory = $this->temp_cache_dir();
+		mkdir($directory, 0700);
+		chmod($directory, 0700);
+
+		$cache = $this->file_cache(['cache_dir' => $directory]);
+
+		$this->assertTrue($cache->set('foo', 'bar'));
+		$this->assertSame('bar', $cache->get('foo'));
+
+		if (DIRECTORY_SEPARATOR === '/')
+		{
+			$this->assertSame(0700, fileperms($directory) & 0777);
+		}
+	}
+
+	/**
+	 * If the cache directory cannot be created, a Cache_Exception naming the
+	 * directory is thrown rather than a raw PHP warning or ErrorException.
+	 *
+	 * @test
+	 */
+	public function test_uncreatable_cache_dir_throws_cache_exception()
+	{
+		$parent = $this->temp_cache_dir();
+		mkdir($parent, 0755);
+
+		// A path below a regular file can never be created, even as root
+		$file = $parent.DIRECTORY_SEPARATOR.'not_a_directory';
+		file_put_contents($file, 'x');
+		$directory = $file.DIRECTORY_SEPARATOR.'cache';
+
+		$cache = $this->file_cache(['cache_dir' => $directory]);
+
+		$this->expectException(Cache_Exception::class);
+		$this->expectExceptionMessage($directory);
+
+		$cache->set('foo', 'bar');
+	}
+
+	/**
+	 * Returns a unique, not yet existing, temporary cache directory path that
+	 * is removed again in tearDown().
+	 *
+	 * @return  string
+	 */
+	protected function temp_cache_dir()
+	{
+		$directory = sys_get_temp_dir().DIRECTORY_SEPARATOR.'konine_file_cache_test_'.uniqid('', TRUE);
+
+		$this->temp_dirs[] = $directory;
+
+		return $directory;
+	}
+
+	/**
+	 * Returns a file cache instance for a one-off config group.
+	 *
+	 * @param   array  $config  config merged over the file driver defaults
+	 * @return  Cache_File
+	 */
+	protected function file_cache(array $config)
+	{
+		$group = 'file_test_'.str_replace('.', '_', uniqid('', TRUE));
+
+		Kohana::$config->load('cache')->set($group, $config + [
+			'driver'         => 'file',
+			'default_expire' => 3600,
+		]);
+
+		return Cache::instance($group);
+	}
+
+	/**
+	 * @var  array  temporary directories created by temp_cache_dir()
+	 */
+	protected $temp_dirs = [];
+
+	public function tearDown(): void
+	{
+		foreach ($this->temp_dirs as $directory)
+		{
+			$this->remove_temp_dir($directory);
+		}
+
+		$this->temp_dirs = [];
+
+		parent::tearDown();
+	}
+
+	/**
+	 * Recursively removes a directory created by temp_cache_dir().
+	 *
+	 * @param   string  $path
+	 * @return  void
+	 */
+	protected function remove_temp_dir($path)
+	{
+		// Only ever delete paths this test created
+		if (strpos($path, sys_get_temp_dir().DIRECTORY_SEPARATOR.'konine_file_cache_test_') !== 0 OR ! file_exists($path))
+			return;
+
+		if (is_dir($path) AND ! is_link($path))
+		{
+			foreach (array_diff(scandir($path), ['.', '..']) as $entry)
+			{
+				$this->remove_temp_dir($path.DIRECTORY_SEPARATOR.$entry);
+			}
+
+			rmdir($path);
+		}
+		else
+		{
+			unlink($path);
+		}
+	}
+
+	/**
 	 * Provider for test_utf8
 	 *
 	 * @return  array

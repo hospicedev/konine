@@ -1,7 +1,7 @@
 # Contributing to Konine
 
 Konine is **actively maintained**. Stability for existing applications comes first, but contributions are welcome across a broad range:
-- Security vulnerabilities
+- Security vulnerabilities (report these **privately**: see [SECURITY.md](SECURITY.md), not public issues)
 - PHP version compatibility bugs (deprecated or removed functionality)
 - Regressions in existing functionality
 - Bug fixes for existing functionality

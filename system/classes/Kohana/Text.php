@@ -62,7 +62,7 @@ class Kohana_Text {
 		$limit = (int) $limit;
 		$end_char = ($end_char === NULL) ? '…' : $end_char;
 
-		if (trim($str) === '')
+		if (trim( (string) $str) === '')
 			return $str;
 
 		if ($limit <= 0)
@@ -93,7 +93,7 @@ class Kohana_Text {
 
 		$limit = (int) $limit;
 
-		if (trim($str) === '' OR UTF8::strlen($str) <= $limit)
+		if (trim( (string) $str) === '' OR UTF8::strlen($str) <= $limit)
 			return $str;
 
 		if ($limit <= 0)
@@ -483,7 +483,7 @@ class Kohana_Text {
 		$format = ($format === NULL) ? '%01.2f %s' : (string) $format;
 
 		// IEC prefixes (binary)
-		if ($si == FALSE OR strpos($force_unit, 'i') !== FALSE)
+		if ($si == FALSE OR strpos( (string) $force_unit, 'i') !== FALSE)
 		{
 			$units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
 			$mod   = 1024;

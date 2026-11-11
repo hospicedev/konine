@@ -11,7 +11,7 @@ Koseven was archived on 2026-04-14. Konine is an **actively maintained** continu
 - **GitHub:** https://github.com/hospicedev/konine
 - **Website:** https://konine.dev
 - **PHP version:** >=8.4 (tested on 8.4 and 8.5)
-- **Current version:** 3.4.0 (released 2026-04-15, tagged `v3.4.0`)
+- **Current version:** 3.4.1 (released 2026-11-02, tagged `v3.4.1`)
 - **License:** BSD-3-Clause
 - **Lineage:** Kohana 3.3.x -> Koseven 3.3.x -> Konine 3.4.x
 
@@ -188,11 +188,11 @@ vendor/bin/phpunit
 
 Some tests require memcached (port 11211) and redis (port 6379) services running locally.
 
-### Test Results (v3.4.0)
+### Test Results (v3.4.1)
 
 ```
 PHPUnit 10.5.x / PHP 8.4
-Tests: 1472, Assertions: 3067, Skipped: 97
+Tests: 1464, Assertions: 3182, Skipped: 42
 Errors: 0, Failures: 0, Warnings: 0
 ```
 

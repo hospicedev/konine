@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+<!-- Security vulnerabilities must NOT be reported here. Please report them privately: see SECURITY.md or https://github.com/hospicedev/konine/security/advisories/new -->
+
 **Describe the bug**
 A clear and concise description of what the bug is, what version of Konine you are running, etc.
 

@@ -74,11 +74,73 @@ In the default route, all the keys are optional, and the controller and action a
 
 TODO: need an example here
 
-You can also use defaults to set a key that isn't in the route at all.
-
-TODO: example of either using directory or controller where it isn't in the route, but set by defaults
+You can also use defaults to set a key that isn't in the route at all. The routes under [Directory](#directory) below set `directory` and `controller` this way.
 
 ### Directory
+
+The `directory` parameter names a controller subdirectory under `classes/Controller`. The URL does not have to match the directory or the controller name.
+
+#### Nested directories
+
+For a controller in:
+
+	classes/Controller/Admin/Reports/Overview.php
+
+with the class name `Controller_Admin_Reports_Overview`, use a route like this:
+
+	Route::set('admin_reports', 'admin/reports(/<controller>(/<action>))')
+		->defaults(array(
+			'directory'  => 'Admin/Reports',
+			'controller' => 'Overview',
+			'action'     => 'index',
+		));
+
+The URL `admin/reports/overview` then calls `Controller_Admin_Reports_Overview::action_index()`.
+
+When you separate directory levels with `/`, write each level with its real casing. Route capitalises the first letter of each underscore-separated word, but not of each `/`-separated level: `admin/reports` becomes `Admin/reports`, not `Admin/Reports`. Alternatively, write the levels with underscores: `admin_reports` becomes `Admin_Reports`, which resolves to the same controller.
+
+#### CamelCase names with a lowercase URL
+
+Directory and controller names can contain more than one capital letter, for example:
+
+	classes/Controller/RuleEngines/MyEngine.php    (Controller_RuleEngines_MyEngine)
+
+To serve this controller at `ruleengines/myengine`, map the URL explicitly:
+
+	Route::set('my_engine', 'ruleengines/myengine(/<action>)')
+		->defaults(array(
+			'directory'  => 'RuleEngines',
+			'controller' => 'MyEngine',
+			'action'     => 'index',
+		));
+
+Here `ruleengines/myengine` is a literal URL. The directory and controller come from the defaults, which keep their casing.
+
+#### CamelCase names with a hyphenated URL
+
+The same controller can be served at `rule-engines/my-engine` instead:
+
+	Route::set('my_engine', 'rule-engines/my-engine(/<action>)')
+		->defaults(array(
+			'directory'  => 'RuleEngines',
+			'controller' => 'MyEngine',
+			'action'     => 'index',
+		));
+
+The two routes above are alternatives; choose the URL spelling that suits your application. Neither requires renaming the controller.
+
+#### How a `<controller>` taken from the URL is normalised
+
+A `<controller>` value taken from the URL is normalised the same way, which differs from an explicitly mapped URL:
+
+* `myEngine` becomes `MyEngine`.
+* `myengine` becomes `Myengine`, not `MyEngine`.
+* `my_engine` becomes `My_Engine`, which maps to `My/Engine.php`, not `MyEngine.php`.
+* Hyphens are not converted: `my-engine` becomes `My-engine`, which can't be a class name, so the request returns a 404.
+
+Use an explicit mapping when the URL doesn't keep the controller's capitalisation or uses a different spelling.
+
+[!!] Controller file and directory names must match the casing of the class name. Wrong casing may go unnoticed on a case-insensitive filesystem (common on Windows and macOS) but stop the controller from loading on a case-sensitive one (common on Linux servers). It can even work some of the time on Linux: PHP class names are not case-sensitive, so once a controller has been loaded under its correct name in a request, the wrongly cased name also finds it.
 
 ## Route Filters
 
