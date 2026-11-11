@@ -179,6 +179,13 @@ class Kohana_Database_PDO extends Database {
 			}
 			elseif (is_string($as_object))
 			{
+				if ($params !== NULL)
+				{
+					// Pass constructor params positionally. PHP 8.5+ treats
+					// string keys as named arguments; PHP 8.4 ignored them.
+					$params = array_values($params);
+				}
+
 				$result->setFetchMode(PDO::FETCH_CLASS, $as_object, $params);
 			}
 			else

@@ -111,8 +111,14 @@ class Kohana_Database_Query {
 	/**
 	 * Returns results as objects
 	 *
+	 * [!!] How `$params` with string keys are passed to the constructor
+	 *      depends on the driver. The PDO driver always passes them
+	 *      positionally (in array order, ignoring the keys). The MySQLi
+	 *      driver passes string keys as named arguments. Use a list
+	 *      (integer keys) for the same behaviour with every driver.
+	 *
 	 * @param   string  $class  classname or TRUE for stdClass
-	 * @param   array   $params
+	 * @param   array   $params constructor arguments for $class
 	 * @return  $this
 	 */
 	public function as_object($class = TRUE, ?array $params = NULL)
