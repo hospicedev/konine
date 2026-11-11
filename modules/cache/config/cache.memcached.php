@@ -126,9 +126,9 @@ return [
             // Type: integer, default: 0.
             ),
         ),
-    'apc' => array
+    'apcu' => array
     (
-        'driver' => 'apc',
+        'driver' => 'apcu',
         'default_expire' => 3600,
     ),
     'file' => array

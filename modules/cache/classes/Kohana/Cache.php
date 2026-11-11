@@ -6,7 +6,8 @@
  *
  * ### Supported cache engines
  *
- * *  [APC](http://php.net/manual/en/book.apc.php)
+ * *  [APCu](https://www.php.net/manual/en/book.apcu.php)
+ * *  APC (deprecated, use APCu)
  * *  [eAccelerator](http://eaccelerator.net/)
  * *  File
  * *  [Memcache](http://memcached.org/)
@@ -17,7 +18,7 @@
  * ### Introduction to caching
  *
  * Caching should be implemented with consideration. Generally, caching the result of resources
- * is faster than reprocessing them. Choosing what, how and when to cache is vital. PHP APC is
+ * is faster than reprocessing them. Choosing what, how and when to cache is vital. PHP APCu is
  * presently one of the fastest caching systems available, closely followed by Memcache. SQLite
  * and File caching are two of the slowest cache methods, however usually faster than reprocessing
  * a complex set of instructions.

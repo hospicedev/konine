@@ -3,6 +3,11 @@
  * [Kohana Cache](api/Kohana_Cache) APC driver. Provides an opcode based
  * driver for the Kohana Cache library.
  *
+ * [!!] Deprecated: the APC extension was never released for PHP 7 or later,
+ *      so this driver cannot be used on any supported PHP version. Use the
+ *      [Cache_Apcu] driver (`'driver' => 'apcu'`) instead. This class may be
+ *      removed in a future major version.
+ *
  * ### Configuration example
  *
  * Below is an example of an _apc_ server configuration.
@@ -30,6 +35,7 @@
  * *  PHP 5.2.4 or greater
  * *  APC PHP extension
  *
+ * @deprecated  3.5.0  The APC extension is not available on PHP 7 or later. Use Cache_Apcu (driver `apcu`) instead.
  * @package    Kohana/Cache
  * @category   Base
  * @author     Kohana Team
@@ -49,7 +55,7 @@ class Kohana_Cache_Apc extends Cache implements Cache_Arithmetic {
 	{
 		if ( ! extension_loaded('apc'))
 		{
-			throw new Cache_Exception('PHP APC extension is not available.');
+			throw new Cache_Exception('PHP APC extension is not available. The APC driver is deprecated: use the APCu driver (\'driver\' => \'apcu\') instead.');
 		}
 
 		parent::__construct($config);

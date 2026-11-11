@@ -85,6 +85,8 @@ failure_callback | __NO__   | (_[callback](http://www.php.net/manual/en/language
 
 ## APC settings
 
+[!!] The APC driver is deprecated. The APC extension is not available on PHP 7 or later, so this driver always throws a [Cache_Exception]. Use the [APCu settings](#apcu-settings) instead.
+
 	'apc'      => array
 	(
 		'driver'             => 'apc',
@@ -164,7 +166,7 @@ The following example demonstrates how to add a new configuration setting, using
 		// Override the default configuration
 		'fastkv'   => array
 		(
-			'driver'         => 'apc',  // Use Memcached as the default driver
+			'driver'         => 'apcu', // Use APCu as the driver
 			'default_expire' => 1000,   // Overide default expiry
 		)
 	);
