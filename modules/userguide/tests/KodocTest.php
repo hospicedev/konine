@@ -329,6 +329,82 @@ COMMENT
 	}
 
 	/**
+	 * Provides DocBlocks that have no description, so the description
+	 * stays NULL until it is trimmed
+	 *
+	 * @return array
+	 */
+	public function provider_parse_without_description()
+	{
+		return [
+			// Empty string
+			['', TRUE, ['', []]],
+			['', FALSE, ['', []]],
+			// Empty DocBlock
+			["/**\n */", TRUE, ['', []]],
+			["/**\n */", FALSE, ['', []]],
+			// DocBlock with only tags
+			["/**\n * @tag Content\n */", TRUE, ['', ['tag' => ['Content']]]],
+			["/**\n * @tag Content\n */", FALSE, ['', ['tag' => ['Content']]]],
+		];
+	}
+
+	/**
+	 * Tests that a DocBlock without a description returns an empty
+	 * description, without raising a deprecation for passing NULL to trim()
+	 *
+	 * @covers  Kohana_Kodoc::parse
+	 *
+	 * @dataProvider    provider_parse_without_description
+	 *
+	 * @param   string  $comment    Argument to the method
+	 * @param   boolean $html       Whether to convert to HTML
+	 * @param   array   $expected   Expected result
+	 */
+	public function test_parse_without_description($comment, $html, $expected)
+	{
+		$deprecations = $this->_collect_deprecations(function () use ($comment, $html, & $result)
+		{
+			$result = Kodoc::parse($comment, $html);
+		});
+
+		$this->assertSame($expected, $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Runs a callback with E_DEPRECATED enabled and returns the messages
+	 * of any deprecations it raised.
+	 *
+	 * @param   callable  $callback
+	 * @return  array
+	 */
+	protected function _collect_deprecations(callable $callback)
+	{
+		$deprecations = [];
+		$error_reporting = error_reporting(E_ALL);
+
+		set_error_handler(function ($errno, $errstr) use (& $deprecations)
+		{
+			$deprecations[] = $errstr;
+
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$callback();
+		}
+		finally
+		{
+			restore_error_handler();
+			error_reporting($error_reporting);
+		}
+
+		return $deprecations;
+	}
+
+	/**
 	 * Provides test data for test_transparent_classes
 	 * @return array
 	 */
