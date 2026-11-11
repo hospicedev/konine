@@ -412,6 +412,28 @@ class Kohana_URLTest extends Unittest_TestCase
 	}
 
 	/**
+	 * Tests URL::base() with a NULL base URL and a protocol returns the same
+	 * value and raises no deprecation.
+	 *
+	 * @test
+	 */
+	public function test_base_null_base_url_with_protocol_raises_no_deprecation()
+	{
+		$this->setEnvironment([
+			'Kohana::$base_url' => NULL,
+			'HTTP_HOST'         => 'example.com',
+		]);
+
+		[$result, $deprecations] = $this->call_capturing_deprecations(function ()
+		{
+			return URL::base('http');
+		});
+
+		$this->assertSame('http://example.com', $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
 	 * Calls $callback with E_DEPRECATED captured locally, as the unittest
 	 * bootstrap masks it.
 	 *
