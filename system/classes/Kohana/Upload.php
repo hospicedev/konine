@@ -213,7 +213,12 @@ class Kohana_Upload {
 			try
 			{
 				// Get the width and height from the uploaded image
-				list($width, $height) = getimagesize($file['tmp_name']);
+				$size = getimagesize($file['tmp_name']);
+
+				if ($size !== FALSE)
+				{
+					list($width, $height) = $size;
+				}
 			}
 			catch (ErrorException $e)
 			{

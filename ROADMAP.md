@@ -27,9 +27,16 @@ Branched from Koseven 3.3.10. The primary goal is to ensure the framework runs c
 
 **Patch versions** (3.4.1, 3.4.2, ...) are released for security fixes and bug fixes. Once 3.5 development begins on `master`, they're released from the `3.4.x` maintenance branch, with fixes backported from `master` (see [Branches and Releases](CONTRIBUTING.md#branches-and-releases)).
 
+### 3.5.x — PHP 8.5 Support (In Development)
+
+Adds PHP 8.5 support while keeping PHP 8.4 as the minimum. Tracked in [#17](https://github.com/hospicedev/konine/issues/17).
+
+- Fix PHP 8.5 deprecations without breaking PHP 8.4
+- Update CI matrix to PHP 8.4 and 8.5
+
 ### Future Minor Versions
 
-A new minor version (e.g. 3.5.0) is cut when requested enhancements or new features are ready to ship, or when a future PHP version introduces breaking changes that require further compatibility work.
+A new minor version (e.g. 3.6.0) is cut when requested enhancements or new features are ready to ship, or when a future PHP version introduces breaking changes that require further compatibility work.
 
 ## Planned & Requested Enhancements
 

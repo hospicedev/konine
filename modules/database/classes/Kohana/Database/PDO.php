@@ -51,8 +51,9 @@ class Kohana_Database_PDO extends Database {
 
 		try
 		{
-			// Create a new PDO connection
-			$this->_connection = new PDO($dsn, $username, $password, $options);
+			// Create a new PDO connection, using the driver-specific subclass
+			// (e.g. Pdo\Sqlite) so driver methods are available
+			$this->_connection = PDO::connect($dsn, $username, $password, $options);
 		}
 		catch (PDOException $e)
 		{
@@ -73,7 +74,7 @@ class Kohana_Database_PDO extends Database {
 	 *
 	 * [!!] Works only with SQLite
 	 *
-	 * @link http://php.net/manual/function.pdo-sqlitecreateaggregate
+	 * @link https://www.php.net/manual/pdo-sqlite.createaggregate.php
 	 *
 	 * @param   string      $name       Name of the SQL function to be created or redefined
 	 * @param   callback    $step       Called for each row of a result set
@@ -86,6 +87,14 @@ class Kohana_Database_PDO extends Database {
 	{
 		$this->_connection or $this->connect();
 
+		if ($this->_connection instanceof Pdo\Sqlite)
+		{
+			return $this->_connection->createAggregate(
+				$name, $step, $final, $arguments
+			);
+		}
+
+		// Plain PDO connection, e.g. from an overridden connect()
 		return $this->_connection->sqliteCreateAggregate(
 			$name, $step, $final, $arguments
 		);
@@ -96,7 +105,7 @@ class Kohana_Database_PDO extends Database {
 	 *
 	 * [!!] Works only with SQLite
 	 *
-	 * @link http://php.net/manual/function.pdo-sqlitecreatefunction
+	 * @link https://www.php.net/manual/pdo-sqlite.createfunction.php
 	 *
 	 * @param   string      $name       Name of the SQL function to be created or redefined
 	 * @param   callback    $callback   Callback which implements the SQL function
@@ -108,6 +117,14 @@ class Kohana_Database_PDO extends Database {
 	{
 		$this->_connection or $this->connect();
 
+		if ($this->_connection instanceof Pdo\Sqlite)
+		{
+			return $this->_connection->createFunction(
+				$name, $callback, $arguments
+			);
+		}
+
+		// Plain PDO connection, e.g. from an overridden connect()
 		return $this->_connection->sqliteCreateFunction(
 			$name, $callback, $arguments
 		);
