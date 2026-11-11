@@ -41,6 +41,30 @@ class Kohana_Cookie {
 	public static $httponly = FALSE;
 
 	/**
+	 * SameSite attribute sent with every cookie set or deleted by this class.
+	 *
+	 * Allowed values are 'Lax', 'Strict' and 'None' (case-insensitive), or
+	 * NULL to omit the attribute entirely. NULL is the default and keeps the
+	 * behaviour of earlier releases unchanged.
+	 *
+	 * [!!] 'None' requires Cookie::$secure to be TRUE, and lowers CSRF
+	 *      protection. Any other value throws a Kohana_Exception on the first
+	 *      cookie operation.
+	 *
+	 * @var  string|NULL  SameSite attribute: 'Lax', 'Strict', 'None', or NULL to omit (default)
+	 */
+	public static $samesite = NULL;
+
+	/**
+	 * @var  array  Allowed SameSite values, keyed by their lower-case form
+	 */
+	protected static $_samesite_values = [
+		'lax'    => 'Lax',
+		'strict' => 'Strict',
+		'none'   => 'None',
+	];
+
+	/**
 	 * Gets the value of a signed cookie. Cookies without signatures will not
 	 * be returned. If the cookie signature is present, but invalid, the cookie
 	 * will be deleted.
@@ -119,7 +143,7 @@ class Kohana_Cookie {
 		// Add the salt to the cookie value
 		$value = Cookie::salt($name, $value).'~'.$value;
 
-		return static::_setcookie($name, $value, $lifetime, Cookie::$path, Cookie::$domain, Cookie::$secure, Cookie::$httponly);
+		return static::_dispatch($name, $value, $lifetime);
 	}
 
 	/**
@@ -136,7 +160,67 @@ class Kohana_Cookie {
 		unset($_COOKIE[$name]);
 
 		// Empty the cookie and make it expire
-		return static::_setcookie($name, '', -86400, Cookie::$path, Cookie::$domain, Cookie::$secure, Cookie::$httponly);
+		return static::_dispatch($name, '', -86400);
+	}
+
+	/**
+	 * Sends a cookie using the configured path, domain, secure, httponly and
+	 * samesite settings.
+	 *
+	 * When Cookie::$samesite is NULL (the default) this calls
+	 * [Cookie::_setcookie] with exactly the same arguments as earlier
+	 * releases, so existing overrides keep working. Otherwise it calls
+	 * [Cookie::_setcookie_with_options].
+	 *
+	 * @param   string  $name   name of cookie
+	 * @param   string  $value  value of cookie
+	 * @param   integer $expire expiry as a UNIX timestamp, or 0 for a session cookie
+	 * @return  boolean
+	 * @throws  Kohana_Exception  if Cookie::$samesite is invalid
+	 */
+	protected static function _dispatch($name, $value, $expire)
+	{
+		if (Cookie::$samesite === NULL)
+		{
+			// Legacy path: unchanged, so existing _setcookie() overrides still apply
+			return static::_setcookie($name, $value, $expire, Cookie::$path, Cookie::$domain, Cookie::$secure, Cookie::$httponly);
+		}
+
+		return static::_setcookie_with_options($name, $value, [
+			'expires'  => $expire,
+			'path'     => Cookie::$path,
+			'domain'   => Cookie::$domain,
+			'secure'   => Cookie::$secure,
+			'httponly' => Cookie::$httponly,
+			'samesite' => static::_samesite(),
+		]);
+	}
+
+	/**
+	 * Validates Cookie::$samesite and returns its normalised form, for
+	 * example 'lax' becomes 'Lax'. Only the allowed values can reach the
+	 * Set-Cookie header.
+	 *
+	 * @return  string  'Lax', 'Strict' or 'None'
+	 * @throws  Kohana_Exception  if the value is not allowed, or is 'None' without Cookie::$secure set to TRUE
+	 */
+	protected static function _samesite()
+	{
+		$samesite = Cookie::$samesite;
+
+		if ( ! is_string($samesite) OR ! isset(static::$_samesite_values[strtolower($samesite)]))
+		{
+			throw new Kohana_Exception('Invalid Cookie::$samesite value. Allowed values are NULL, \'Lax\', \'Strict\' and \'None\'.');
+		}
+
+		$samesite = static::$_samesite_values[strtolower($samesite)];
+
+		if ($samesite === 'None' AND Cookie::$secure !== TRUE)
+		{
+			throw new Kohana_Exception('Cookie::$samesite \'None\' requires Cookie::$secure to be TRUE. Browsers reject SameSite=None cookies that are not Secure.');
+		}
+
+		return $samesite;
 	}
 
 	/**
@@ -182,6 +266,26 @@ class Kohana_Cookie {
 	protected static function _setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)
 	{
 		return setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
+	}
+
+	/**
+	 * Proxy for the native setcookie function using its options array form,
+	 * used when Cookie::$samesite is set. Override it to mock cookies in unit
+	 * tests.
+	 *
+	 * [!!] Applications that override [Cookie::_setcookie] and set
+	 *      Cookie::$samesite must also override this method, because
+	 *      _setcookie() is not called when SameSite is enabled.
+	 *
+	 * @param   string  $name     name of cookie
+	 * @param   string  $value    value of cookie
+	 * @param   array   $options  expires, path, domain, secure, httponly and samesite
+	 * @return  boolean
+	 * @see     setcookie
+	 */
+	protected static function _setcookie_with_options($name, $value, array $options)
+	{
+		return setcookie($name, $value, $options);
 	}
 
 	/**

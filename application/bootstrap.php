@@ -162,6 +162,15 @@ Kohana::modules([
  * to http://www.example.com will still reveal this cookie
  */
 // Cookie::$secure = isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS'] == 'on' ? TRUE : FALSE;
+/**
+ * Cookie SameSite attribute
+ * 'Lax' is recommended for session cookies. 'Strict' also blocks cookies on
+ * inbound cross-site links (e.g. OAuth/SSO returns). 'None' requires
+ * Cookie::$secure = TRUE and lowers CSRF protection. NULL (the default) omits
+ * the attribute. Applies to Session_Cookie and Session_Database, not Session_Native.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
+ */
+// Cookie::$samesite = 'Lax';
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of

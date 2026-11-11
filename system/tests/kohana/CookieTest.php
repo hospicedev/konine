@@ -29,6 +29,7 @@ class Kohana_CookieTest extends Unittest_TestCase
 	{
 		parent::setUp();
 		Kohana_CookieTest_TestableCookie::$_mock_cookies_set = [];
+		Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options = [];
 
 		$this->setEnvironment([
 			'Cookie::$salt'   => 'some-random-salt',
@@ -173,6 +174,336 @@ class Kohana_CookieTest extends Unittest_TestCase
 	}
 
 	/**
+	 * With the default (NULL) SameSite setting, set() must use the legacy 7-argument _setcookie() proxy exactly as
+	 * before, so existing overrides and mocks keep working.
+	 *
+	 * @covers Cookie::set
+	 */
+	public function test_set_without_samesite_uses_legacy_setcookie_proxy()
+	{
+		$this->assertNull(Cookie::$samesite, 'SameSite defaults to NULL');
+
+		Kohana_CookieTest_TestableCookie::set('cookie', 'value', 0);
+
+		$this->assertSetCookieWith([
+			'name'     => 'cookie',
+			'value'    => Cookie::salt('cookie', 'value').'~value',
+			'expire'   => 0,
+			'path'     => Cookie::$path,
+			'domain'   => Cookie::$domain,
+			'secure'   => Cookie::$secure,
+			'httponly' => Cookie::$httponly,
+		]);
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options);
+	}
+
+	/**
+	 * @covers Cookie::delete
+	 */
+	public function test_delete_without_samesite_uses_legacy_setcookie_proxy()
+	{
+		Kohana_CookieTest_TestableCookie::delete('cookie');
+
+		$this->assertDeletedCookie('cookie');
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options);
+	}
+
+	/**
+	 * Provider for SameSite values that are accepted, with the normalised attribute value.
+	 *
+	 * @return array of $configured, $expected
+	 */
+	public function provider_valid_samesite()
+	{
+		return [
+			['Lax',    'Lax'],
+			['Strict', 'Strict'],
+			['None',   'None'],
+			['lax',    'Lax'],
+			['STRICT', 'Strict'],
+			['nOnE',   'None'],
+		];
+	}
+
+	/**
+	 * @param string $configured
+	 * @param string $expected
+	 *
+	 * @dataProvider provider_valid_samesite
+	 * @covers Cookie::set
+	 */
+	public function test_set_with_samesite_passes_options_array($configured, $expected)
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => $configured,
+			'Cookie::$path'     => '/path',
+			'Cookie::$domain'   => 'my.domain',
+			'Cookie::$secure'   => TRUE,
+			'Cookie::$httponly' => TRUE,
+		]);
+
+		$this->assertTrue(Kohana_CookieTest_TestableCookie::set('cookie', 'value', 10));
+
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set, 'Legacy proxy not used');
+		$this->assertSetCookieWithOptions(
+			'cookie',
+			Cookie::salt('cookie', 'value').'~value',
+			[
+				'expires'  => 10 + self::UNIX_TIMESTAMP,
+				'path'     => '/path',
+				'domain'   => 'my.domain',
+				'secure'   => TRUE,
+				'httponly' => TRUE,
+				'samesite' => $expected,
+			]
+		);
+	}
+
+	/**
+	 * @param string $configured
+	 * @param string $expected
+	 *
+	 * @dataProvider provider_valid_samesite
+	 * @covers Cookie::delete
+	 */
+	public function test_delete_with_samesite_passes_options_array($configured, $expected)
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => $configured,
+			'Cookie::$secure'   => TRUE,
+		]);
+		$_COOKIE['cookie'] = 'anything';
+
+		$this->assertTrue(Kohana_CookieTest_TestableCookie::delete('cookie'));
+
+		$this->assertArrayNotHasKey('cookie', $_COOKIE);
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set, 'Legacy proxy not used');
+		$this->assertSetCookieWithOptions('cookie', '', [
+			'expires'  => -86400,
+			'path'     => Cookie::$path,
+			'domain'   => Cookie::$domain,
+			'secure'   => TRUE,
+			'httponly' => Cookie::$httponly,
+			'samesite' => $expected,
+		]);
+	}
+
+	/**
+	 * @covers Cookie::delete
+	 */
+	public function test_delete_with_samesite_does_not_require_configured_salt()
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => 'Lax',
+			'Cookie::$salt'     => NULL,
+		]);
+
+		$this->assertTrue(Kohana_CookieTest_TestableCookie::delete('cookie'));
+		$this->assertCount(1, Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options);
+	}
+
+	/**
+	 * Provider for SameSite values that must be rejected.
+	 *
+	 * @return array
+	 */
+	public function provider_invalid_samesite()
+	{
+		return [
+			['Foo'],
+			['lax '],
+			[' Lax'],
+			[''],
+			["Lax\r\nSet-Cookie: injected=1"],
+			['Lax; Secure'],
+			[TRUE],
+			[FALSE],
+			[1],
+			[['Lax']],
+		];
+	}
+
+	/**
+	 * @param mixed $samesite
+	 *
+	 * @dataProvider provider_invalid_samesite
+	 * @covers Cookie::set
+	 */
+	public function test_set_with_invalid_samesite_throws($samesite)
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => $samesite,
+			'Cookie::$secure'   => TRUE,
+		]);
+
+		try
+		{
+			Kohana_CookieTest_TestableCookie::set('cookie', 'value');
+			$this->fail('Expected Kohana_Exception was not thrown');
+		}
+		catch (Kohana_Exception $e)
+		{
+			$this->assertStringContainsString('Cookie::$samesite', $e->getMessage());
+		}
+
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set, 'No cookie sent');
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options, 'No cookie sent');
+	}
+
+	/**
+	 * @param mixed $samesite
+	 *
+	 * @dataProvider provider_invalid_samesite
+	 * @covers Cookie::delete
+	 */
+	public function test_delete_with_invalid_samesite_throws($samesite)
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => $samesite,
+			'Cookie::$secure'   => TRUE,
+		]);
+
+		try
+		{
+			Kohana_CookieTest_TestableCookie::delete('cookie');
+			$this->fail('Expected Kohana_Exception was not thrown');
+		}
+		catch (Kohana_Exception $e)
+		{
+			$this->assertStringContainsString('Cookie::$samesite', $e->getMessage());
+		}
+
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set, 'No cookie sent');
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options, 'No cookie sent');
+	}
+
+	/**
+	 * Provider for Cookie::$secure values that do not satisfy SameSite=None.
+	 *
+	 * @return array
+	 */
+	public function provider_insecure_values()
+	{
+		return [
+			[FALSE],
+			[NULL],
+			[1],
+			['1'],
+		];
+	}
+
+	/**
+	 * Browsers reject SameSite=None without Secure, so fail loudly rather than silently dropping cookies or
+	 * silently forcing Secure on.
+	 *
+	 * @param mixed $secure
+	 *
+	 * @dataProvider provider_insecure_values
+	 * @covers Cookie::set
+	 */
+	public function test_set_with_samesite_none_without_secure_throws($secure)
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => 'None',
+			'Cookie::$secure'   => $secure,
+		]);
+
+		try
+		{
+			Kohana_CookieTest_TestableCookie::set('cookie', 'value');
+			$this->fail('Expected Kohana_Exception was not thrown');
+		}
+		catch (Kohana_Exception $e)
+		{
+			$this->assertStringContainsString('Cookie::$secure', $e->getMessage());
+		}
+
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set, 'No cookie sent');
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options, 'No cookie sent');
+	}
+
+	/**
+	 * @param mixed $secure
+	 *
+	 * @dataProvider provider_insecure_values
+	 * @covers Cookie::delete
+	 */
+	public function test_delete_with_samesite_none_without_secure_throws($secure)
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => 'None',
+			'Cookie::$secure'   => $secure,
+		]);
+
+		try
+		{
+			Kohana_CookieTest_TestableCookie::delete('cookie');
+			$this->fail('Expected Kohana_Exception was not thrown');
+		}
+		catch (Kohana_Exception $e)
+		{
+			$this->assertStringContainsString('Cookie::$secure', $e->getMessage());
+		}
+
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set, 'No cookie sent');
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options, 'No cookie sent');
+	}
+
+	/**
+	 * @covers Cookie::set
+	 */
+	public function test_set_with_samesite_lax_or_strict_does_not_require_secure()
+	{
+		$this->setEnvironment([
+			'Cookie::$samesite' => 'Strict',
+			'Cookie::$secure'   => FALSE,
+		]);
+
+		$this->assertTrue(Kohana_CookieTest_TestableCookie::set('cookie', 'value'));
+		$this->assertCount(1, Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options);
+		$this->assertFalse(Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options[0]['options']['secure']);
+	}
+
+	/**
+	 * Signing must be unaffected by SameSite.
+	 *
+	 * @covers Cookie::get
+	 * @covers Cookie::set
+	 */
+	public function test_get_round_trips_signed_cookie_with_samesite()
+	{
+		$this->setEnvironment(['Cookie::$samesite' => 'Lax']);
+
+		Kohana_CookieTest_TestableCookie::set('cookie', 'value');
+		$cookie = Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options[0];
+		$_COOKIE[$cookie['name']] = $cookie['value'];
+
+		$this->assertEquals('value', Kohana_CookieTest_TestableCookie::get('cookie', 'default'));
+	}
+
+	/**
+	 * @covers Cookie::get
+	 */
+	public function test_get_deletes_tampered_cookie_with_samesite()
+	{
+		$this->setEnvironment(['Cookie::$samesite' => 'Lax']);
+		$_COOKIE['cookie'] = Cookie::salt('cookie', 'value').'~tampered';
+
+		$this->assertEquals('default', Kohana_CookieTest_TestableCookie::get('cookie', 'default'));
+
+		$this->assertArrayNotHasKey('cookie', $_COOKIE);
+		$this->assertEmpty(Kohana_CookieTest_TestableCookie::$_mock_cookies_set, 'Legacy proxy not used');
+		$this->assertSetCookieWithOptions('cookie', '', [
+			'expires'  => -86400,
+			'path'     => Cookie::$path,
+			'domain'   => Cookie::$domain,
+			'secure'   => Cookie::$secure,
+			'httponly' => Cookie::$httponly,
+			'samesite' => 'Lax',
+		]);
+	}
+
+	/**
 	 * @covers Cookie::salt
 	 */
 	public function test_salt_throws_with_no_configured_salt()
@@ -268,6 +599,24 @@ class Kohana_CookieTest extends Unittest_TestCase
 	}
 
 	/**
+	 * Verify that there was a single call to the options-array setcookie proxy with the given arguments
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @param array  $options
+	 */
+	// @codingStandardsIgnoreStart
+	protected function assertSetCookieWithOptions($name, $value, array $options)
+	// @codingStandardsIgnoreEnd
+	{
+		$this->assertCount(1, Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options);
+		$this->assertSame(
+			['name' => $name, 'value' => $value, 'options' => $options],
+			Kohana_CookieTest_TestableCookie::$_mock_cookies_set_with_options[0]
+		);
+	}
+
+	/**
 	 * Configure the $_SERVER[HTTP_USER_AGENT] environment variable for the test
 	 *
 	 * @param string $user_agent
@@ -295,6 +644,25 @@ class Kohana_CookieTest_TestableCookie extends Cookie {
 	 * @var array setcookie calls that were made
 	 */
 	public static $_mock_cookies_set = [];
+
+	/**
+	 * @var array options-array setcookie calls that were made
+	 */
+	public static $_mock_cookies_set_with_options = [];
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected static function _setcookie_with_options($name, $value, array $options)
+	{
+		self::$_mock_cookies_set_with_options[] = [
+			'name'    => $name,
+			'value'   => $value,
+			'options' => $options,
+		];
+
+		return TRUE;
+	}
 
 	/**
 	 * {@inheritdoc}
