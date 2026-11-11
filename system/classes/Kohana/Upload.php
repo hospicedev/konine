@@ -200,6 +200,9 @@ class Kohana_Upload {
 	 *     $array->rule('image', 'Upload::image', array(':value', 100, 100, TRUE));
 	 *
 	 *
+	 * [!!] SVG files are never accepted, even on PHP 8.5+ where
+	 *      getimagesize() recognises them, because SVG can contain script.
+	 *
 	 * @param   array   $file       $_FILES item
 	 * @param   integer $max_width  maximum width of image
 	 * @param   integer $max_height maximum height of image
@@ -210,14 +213,12 @@ class Kohana_Upload {
 	{
 		if (Upload::not_empty($file))
 		{
-			try
+			$size = static::_image_size($file['tmp_name']);
+
+			if ($size !== FALSE)
 			{
 				// Get the width and height from the uploaded image
-				list($width, $height) = getimagesize($file['tmp_name']);
-			}
-			catch (ErrorException $e)
-			{
-				// Ignore read errors
+				list($width, $height) = $size;
 			}
 
 			if (empty($width) OR empty($height))
@@ -251,6 +252,43 @@ class Kohana_Upload {
 		}
 
 		return FALSE;
+	}
+
+	/**
+	 * Gets the size of an image file with getimagesize(). Returns FALSE for
+	 * files getimagesize() cannot read, and for SVG files.
+	 *
+	 * SVG is rejected because it can contain script. PHP 8.5+ getimagesize()
+	 * recognises SVG; earlier versions return FALSE for it, so this keeps the
+	 * same behaviour on every PHP version.
+	 *
+	 * @param   string  $filename  path to the image file
+	 * @return  array|FALSE  getimagesize() result, or FALSE if the file is not a supported image
+	 */
+	protected static function _image_size($filename)
+	{
+		try
+		{
+			$size = getimagesize($filename);
+		}
+		catch (ErrorException $e)
+		{
+			// Ignore read errors
+			return FALSE;
+		}
+
+		if ($size === FALSE)
+		{
+			return FALSE;
+		}
+
+		if (defined('IMAGETYPE_SVG') AND $size[2] === IMAGETYPE_SVG)
+		{
+			// PHP 8.5+: never accept SVG as an image
+			return FALSE;
+		}
+
+		return $size;
 	}
 
 }
