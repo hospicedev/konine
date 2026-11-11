@@ -203,6 +203,14 @@ class Kohana_Upload {
 	 * [!!] SVG files are never accepted, even on PHP 8.5+ where
 	 *      getimagesize() recognises them, because SVG can contain script.
 	 *
+	 * [!!] This only checks that getimagesize() recognises the file and its
+	 *      dimensions. It does not prove the content is safe to serve: a file
+	 *      can be a valid image and still contain HTML or script. Also use
+	 *      [Upload::type] with an allowlist of raster extensions, save files
+	 *      under a name and extension your application generates, serve them
+	 *      with a fixed Content-Type and `X-Content-Type-Options: nosniff`,
+	 *      and consider re-encoding them with [Image].
+	 *
 	 * @param   array   $file       $_FILES item
 	 * @param   integer $max_width  maximum width of image
 	 * @param   integer $max_height maximum height of image
