@@ -979,4 +979,111 @@ class Kohana_ValidTest extends Unittest_TestCase
 			Valid::matches($data, $field, $match)
 		);
 	}
+
+	/**
+	 * Provides test data for test_non_string_input_raises_no_deprecation()
+	 *
+	 * Expected values are the results returned on PHP 8.4 before the
+	 * deprecation fixes, so these tests pin down existing behaviour.
+	 *
+	 * @return array
+	 */
+	public function provider_non_string_input()
+	{
+		return [
+			// preg_match() with a NULL subject
+			['url', [NULL], FALSE],
+			['alpha_numeric', [NULL, TRUE], FALSE],
+			['alpha_dash', [NULL], FALSE],
+			['alpha_dash', [NULL, TRUE], FALSE],
+			['digit', [NULL, TRUE], FALSE],
+			['decimal', [NULL], FALSE],
+			['decimal', [NULL, 0], FALSE],
+			['color', [NULL], FALSE],
+			// preg_replace() with a NULL subject
+			['credit_card', [NULL], FALSE],
+			['phone', [NULL], FALSE],
+			['phone', [NULL, [0]], TRUE],
+			// strtotime() with NULL
+			['date', [NULL], FALSE],
+			// ctype_alnum() with non-string input
+			['alpha_numeric', [NULL], FALSE],
+			['alpha_numeric', [TRUE], FALSE],
+			['alpha_numeric', [FALSE], FALSE],
+			['alpha_numeric', [1.5], FALSE],
+			// Integers from -128 to 255 are treated as character codes
+			['alpha_numeric', [5], FALSE],
+			['alpha_numeric', [48], TRUE],
+			['alpha_numeric', [0], FALSE],
+			['alpha_numeric', [200], FALSE],
+			['alpha_numeric', [-5], FALSE],
+			// Other integers are treated as strings
+			['alpha_numeric', [1000], TRUE],
+			['alpha_numeric', [-200], FALSE],
+			// ctype_digit() with non-string input
+			['digit', [NULL], FALSE],
+			['digit', [TRUE], FALSE],
+			['digit', [FALSE], FALSE],
+			['digit', [1.5], FALSE],
+			['digit', [-5], FALSE],
+			['digit', [-200], FALSE],
+			// Non-negative integers short-circuit before ctype_digit()
+			['digit', [0], TRUE],
+			['digit', [5], TRUE],
+			['digit', [48], TRUE],
+			['digit', [1000], TRUE],
+		];
+	}
+
+	/**
+	 * Tests that Valid methods return their existing results for NULL, bool,
+	 * float and int input without raising an E_DEPRECATED notice.
+	 *
+	 * @test
+	 * @dataProvider provider_non_string_input
+	 * @param string  $method    Valid method name
+	 * @param array   $arguments Arguments to pass to the method
+	 * @param boolean $expected  Expected result
+	 */
+	public function test_non_string_input_raises_no_deprecation($method, array $arguments, $expected)
+	{
+		list($result, $deprecations) = $this->call_capturing_deprecations(['Valid', $method], $arguments);
+
+		$this->assertSame($expected, $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Calls a function and collects any E_DEPRECATED messages it raises.
+	 *
+	 * The unittest bootstrap masks E_DEPRECATED, so error reporting is
+	 * enabled locally for the duration of the call.
+	 *
+	 * @param   callable $callback  function to call
+	 * @param   array    $arguments arguments to pass to the function
+	 * @return  array    [result, list of deprecation messages]
+	 */
+	protected function call_capturing_deprecations(callable $callback, array $arguments)
+	{
+		$deprecations = [];
+		$error_reporting = error_reporting(E_ALL);
+
+		set_error_handler(function ($errno, $errstr) use ( & $deprecations)
+		{
+			$deprecations[] = $errstr;
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$result = call_user_func_array($callback, $arguments);
+		}
+		finally
+		{
+			restore_error_handler();
+			error_reporting($error_reporting);
+		}
+
+		return [$result, $deprecations];
+	}
 }
