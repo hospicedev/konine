@@ -171,7 +171,7 @@ class Kohana_UTF8 {
 	public static function strlen($str)
 	{
 		if (UTF8::$server_utf8)
-			return mb_strlen($str, Kohana::$charset);
+			return mb_strlen($str ?? '', Kohana::$charset);
 
 		if ( ! isset(UTF8::$called[__FUNCTION__]))
 		{

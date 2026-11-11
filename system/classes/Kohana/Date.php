@@ -63,6 +63,12 @@ class Kohana_Date {
 			$now = date(DateTime::RFC2822, $now);
 		}
 
+		if ($now === NULL)
+		{
+			// Same as the old NULL (coerced to an empty string, meaning now)
+			$now = 'now';
+		}
+
 		// Create timezone objects
 		$zone_remote = new DateTimeZone($remote);
 		$zone_local  = new DateTimeZone($local);

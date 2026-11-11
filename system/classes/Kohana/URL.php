@@ -67,7 +67,7 @@ class Kohana_URL {
 		if ( ! $protocol)
 		{
 			// Use the configured default protocol
-			$protocol = parse_url($base_url, PHP_URL_SCHEME);
+			$protocol = parse_url($base_url ?? '', PHP_URL_SCHEME);
 		}
 
 		if ($index === TRUE AND ! empty(Kohana::$index_file))

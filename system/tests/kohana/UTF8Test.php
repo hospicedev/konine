@@ -640,4 +640,79 @@ class Kohana_UTF8Test extends Unittest_TestCase
 	{
 		$this->assertSame($expected, UTF8::ord($input));
 	}
+
+	/**
+	 * Provides test data for test_strlen_null_raises_no_deprecation()
+	 *
+	 * @return array
+	 */
+	public static function provider_strlen_null_raises_no_deprecation()
+	{
+		return [
+			// mbstring
+			[TRUE],
+			// Native fallback (system/utf8/strlen.php)
+			[FALSE],
+		];
+	}
+
+	/**
+	 * Tests UTF8::strlen(NULL) returns 0 and raises no deprecation.
+	 *
+	 * @test
+	 * @dataProvider provider_strlen_null_raises_no_deprecation
+	 * @param boolean  $server_utf8  Value for UTF8::$server_utf8
+	 */
+	public function test_strlen_null_raises_no_deprecation($server_utf8)
+	{
+		$original = UTF8::$server_utf8;
+		UTF8::$server_utf8 = $server_utf8;
+
+		try
+		{
+			[$result, $deprecations] = $this->call_capturing_deprecations(function ()
+			{
+				return UTF8::strlen(NULL);
+			});
+		}
+		finally
+		{
+			UTF8::$server_utf8 = $original;
+		}
+
+		$this->assertSame(0, $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Calls $callback with E_DEPRECATED captured locally, as the unittest
+	 * bootstrap masks it.
+	 *
+	 * @param   callable  $callback  Code to run
+	 * @return  array     [return value, list of deprecation messages]
+	 */
+	protected function call_capturing_deprecations(callable $callback)
+	{
+		$deprecations = [];
+		$error_reporting = error_reporting(E_ALL);
+
+		set_error_handler(function ($errno, $errstr) use (&$deprecations)
+		{
+			$deprecations[] = $errstr;
+
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$result = $callback();
+		}
+		finally
+		{
+			restore_error_handler();
+			error_reporting($error_reporting);
+		}
+
+		return [$result, $deprecations];
+	}
 }

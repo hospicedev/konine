@@ -711,4 +711,97 @@ class Kohana_ArrTest extends Unittest_TestCase
 			Arr::flatten($source)
 		);
 	}
+
+	/**
+	 * Provides test data for test_path_int_keys_raise_no_deprecation()
+	 *
+	 * Covers int keys in every range ctype_digit() treats differently:
+	 * -128 to 255 are character codes (48-57 are digits), other ints are
+	 * treated as digit strings. Int keys must still be found.
+	 *
+	 * @return array
+	 */
+	public static function provider_path_int_keys_raise_no_deprecation()
+	{
+		$array = [
+			-200 => 'minus two hundred',
+			-128 => 'minus one hundred and twenty eight',
+			-1   => 'minus one',
+			0    => 'zero',
+			5    => 'five',
+			48   => 'forty eight',
+			50   => 'fifty',
+			255  => 'two hundred and fifty five',
+			256  => 'two hundred and fifty six',
+			1000 => ['name' => 'thousand'],
+		];
+
+		return [
+			['minus two hundred', $array, [-200]],
+			['minus one hundred and twenty eight', $array, [-128]],
+			['minus one', $array, [-1]],
+			['zero', $array, [0]],
+			['five', $array, [5]],
+			['forty eight', $array, [48]],
+			['fifty', $array, [50]],
+			['two hundred and fifty five', $array, [255]],
+			['two hundred and fifty six', $array, [256]],
+			['thousand', $array, [1000, 'name']],
+			['default', $array, [7], 'default'],
+		];
+	}
+
+	/**
+	 * Tests Arr::path() with int keys returns the same values and
+	 * raises no deprecation.
+	 *
+	 * @test
+	 * @dataProvider provider_path_int_keys_raise_no_deprecation
+	 * @param mixed  $expected  The expected value
+	 * @param array  $array     The array to search
+	 * @param array  $path      The path as an array of keys
+	 * @param mixed  $default   The value to return if dnx
+	 */
+	public function test_path_int_keys_raise_no_deprecation($expected, $array, $path, $default = NULL)
+	{
+		[$result, $deprecations] = $this->call_capturing_deprecations(function () use ($array, $path, $default)
+		{
+			return Arr::path($array, $path, $default);
+		});
+
+		$this->assertSame($expected, $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Calls $callback with E_DEPRECATED captured locally, as the unittest
+	 * bootstrap masks it.
+	 *
+	 * @param   callable  $callback  Code to run
+	 * @return  array     [return value, list of deprecation messages]
+	 */
+	protected function call_capturing_deprecations(callable $callback)
+	{
+		$deprecations = [];
+		$error_reporting = error_reporting(E_ALL);
+
+		set_error_handler(function ($errno, $errstr) use (&$deprecations)
+		{
+			$deprecations[] = $errstr;
+
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$result = $callback();
+		}
+		finally
+		{
+			restore_error_handler();
+			error_reporting($error_reporting);
+		}
+
+		return [$result, $deprecations];
+	}
 }
