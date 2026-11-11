@@ -791,4 +791,54 @@ class Kohana_DateTest extends Unittest_TestCase
 	{
 		$this->assertEquals($expected, Date::dos2unix($timestamp));
 	}
+
+	/**
+	 * Tests Date::offset() with the default NULL $now matches an explicit
+	 * 'now' and raises no deprecation.
+	 *
+	 * @test
+	 * @covers Date::offset
+	 */
+	public function test_offset_null_now_raises_no_deprecation()
+	{
+		[$result, $deprecations] = $this->call_capturing_deprecations(function ()
+		{
+			return Date::offset('America/Chicago', 'Europe/London');
+		});
+
+		$this->assertSame(Date::offset('America/Chicago', 'Europe/London', 'now'), $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Calls $callback with E_DEPRECATED captured locally, as the unittest
+	 * bootstrap masks it.
+	 *
+	 * @param   callable  $callback  Code to run
+	 * @return  array     [return value, list of deprecation messages]
+	 */
+	protected function call_capturing_deprecations(callable $callback)
+	{
+		$deprecations = [];
+		$error_reporting = error_reporting(E_ALL);
+
+		set_error_handler(function ($errno, $errstr) use (&$deprecations)
+		{
+			$deprecations[] = $errstr;
+
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$result = $callback();
+		}
+		finally
+		{
+			restore_error_handler();
+			error_reporting($error_reporting);
+		}
+
+		return [$result, $deprecations];
+	}
 }

@@ -67,7 +67,7 @@ class Kohana_URL {
 		if ( ! $protocol)
 		{
 			// Use the configured default protocol
-			$protocol = parse_url($base_url, PHP_URL_SCHEME);
+			$protocol = parse_url($base_url ?? '', PHP_URL_SCHEME);
 		}
 
 		if ($index === TRUE AND ! empty(Kohana::$index_file))
@@ -78,13 +78,13 @@ class Kohana_URL {
 
 		if (is_string($protocol))
 		{
-			if ($port = parse_url($base_url, PHP_URL_PORT))
+			if ($port = parse_url($base_url ?? '', PHP_URL_PORT))
 			{
 				// Found a port, make it usable for the URL
 				$port = ':'.$port;
 			}
 
-			if ($host = parse_url($base_url, PHP_URL_HOST))
+			if ($host = parse_url($base_url ?? '', PHP_URL_HOST))
 			{
 				// Remove everything but the path from the URL
 				$base_url = parse_url($base_url, PHP_URL_PATH);

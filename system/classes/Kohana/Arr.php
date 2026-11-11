@@ -127,9 +127,9 @@ class Kohana_Arr {
 		{
 			$key = array_shift($keys);
 
-			if (ctype_digit($key))
+			if (is_string($key) AND ctype_digit($key))
 			{
-				// Make the key an integer
+				// Make the key an integer (non-string keys are left as they are)
 				$key = (int) $key;
 			}
 

@@ -392,4 +392,76 @@ class Kohana_URLTest extends Unittest_TestCase
 		URL::base('https');
 	}
 
+	/**
+	 * Tests URL::base() with a NULL base URL returns the same value and
+	 * raises no deprecation.
+	 *
+	 * @test
+	 */
+	public function test_base_null_base_url_raises_no_deprecation()
+	{
+		$this->setEnvironment(['Kohana::$base_url' => NULL]);
+
+		[$result, $deprecations] = $this->call_capturing_deprecations(function ()
+		{
+			return URL::base();
+		});
+
+		$this->assertSame(NULL, $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Tests URL::base() with a NULL base URL and a protocol returns the same
+	 * value and raises no deprecation.
+	 *
+	 * @test
+	 */
+	public function test_base_null_base_url_with_protocol_raises_no_deprecation()
+	{
+		$this->setEnvironment([
+			'Kohana::$base_url' => NULL,
+			'HTTP_HOST'         => 'example.com',
+		]);
+
+		[$result, $deprecations] = $this->call_capturing_deprecations(function ()
+		{
+			return URL::base('http');
+		});
+
+		$this->assertSame('http://example.com', $result);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Calls $callback with E_DEPRECATED captured locally, as the unittest
+	 * bootstrap masks it.
+	 *
+	 * @param   callable  $callback  Code to run
+	 * @return  array     [return value, list of deprecation messages]
+	 */
+	protected function call_capturing_deprecations(callable $callback)
+	{
+		$deprecations = [];
+		$error_reporting = error_reporting(E_ALL);
+
+		set_error_handler(function ($errno, $errstr) use (&$deprecations)
+		{
+			$deprecations[] = $errstr;
+
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$result = $callback();
+		}
+		finally
+		{
+			restore_error_handler();
+			error_reporting($error_reporting);
+		}
+
+		return [$result, $deprecations];
+	}
 }
