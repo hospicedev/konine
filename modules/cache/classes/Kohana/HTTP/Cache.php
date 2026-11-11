@@ -71,7 +71,7 @@ class Kohana_HTTP_Cache {
 		$headers = $request->headers()->getArrayCopy();
 		$body    = $request->body();
 
-		return sha1($uri.'?'.http_build_query($query, NULL, '&').'~'.implode('~', $headers).'~'.$body);
+		return sha1($uri.'?'.http_build_query($query, '', '&').'~'.implode('~', $headers).'~'.$body);
 	}
 
 	/**

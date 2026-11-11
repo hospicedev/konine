@@ -244,6 +244,72 @@ class Kohana_Request_Client_CacheTest extends Unittest_TestCase {
 	}
 
 	/**
+	 * Tests that the basic cache key generator returns the same key as
+	 * before, without raising a deprecation for the NULL numeric prefix
+	 * previously passed to http_build_query().
+	 *
+	 * The key must stay byte-identical: applications have existing cache
+	 * entries stored under it.
+	 *
+	 * @return void
+	 */
+	public function test_basic_cache_key_generator()
+	{
+		$request = Request::factory('welcome/index')
+			->query([
+				'foo' => 'bar',
+				'list' => ['a', 'b'],
+				'space' => 'x y&z',
+				0 => 'numeric',
+			])
+			->headers([
+				'accept' => 'text/html',
+				'x-custom' => 'value',
+			])
+			->body('request body');
+
+		$deprecations = $this->_collect_deprecations(function () use ($request, & $key)
+		{
+			$key = HTTP_Cache::basic_cache_key_generator($request);
+		});
+
+		$this->assertSame('45b4c3f20e76e9f6b50388d26215aa52cf9b745a', $key);
+		$this->assertSame([], $deprecations);
+	}
+
+	/**
+	 * Runs a callback with E_DEPRECATED enabled and returns the messages
+	 * of any deprecations it raised.
+	 *
+	 * @param   callable  $callback
+	 * @return  array
+	 */
+	protected function _collect_deprecations(callable $callback)
+	{
+		$deprecations = [];
+		$error_reporting = error_reporting(E_ALL);
+
+		set_error_handler(function ($errno, $errstr) use (& $deprecations)
+		{
+			$deprecations[] = $errstr;
+
+			return TRUE;
+		}, E_DEPRECATED);
+
+		try
+		{
+			$callback();
+		}
+		finally
+		{
+			restore_error_handler();
+			error_reporting($error_reporting);
+		}
+
+		return $deprecations;
+	}
+
+	/**
 	 * Returns a mock object for Cache
 	 * @return MockObject
 	 * @throws ReflectionException
