@@ -79,7 +79,8 @@ class Kohana_Auth_File extends Auth {
 	}
 
 	/**
-	 * Compare password with original (plain text). Works for current (logged in) user
+	 * Compare a plain text password with the stored hash of the current
+	 * (logged in) user.
 	 *
 	 * @param   string   $password  Password
 	 * @return  boolean
@@ -88,10 +89,15 @@ class Kohana_Auth_File extends Auth {
 	{
 		$username = $this->get_user();
 
-		if ($username === FALSE)
+		if ($username === NULL OR $username === FALSE)
 			return FALSE;
 
-		return ($password === $this->password($username));
+		$stored = $this->password($username);
+
+		if ( ! is_string($stored) OR ! is_string($password))
+			return FALSE;
+
+		return hash_equals($stored, $this->hash($password));
 	}
 
 }

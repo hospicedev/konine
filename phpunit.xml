@@ -7,6 +7,7 @@
         cacheDirectory=".phpunit.cache">
     <testsuite name="default">
         <directory suffix="Test.php">system/tests/</directory>
+        <directory suffix="Test.php">modules/auth/tests/</directory>
         <directory suffix="Test.php">modules/cache/tests/</directory>
         <directory suffix="Test.php">modules/database/tests/</directory>
         <exclude>modules/cache/tests/cache/CacheBasicMethodsTest.php</exclude>
