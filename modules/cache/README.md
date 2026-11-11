@@ -8,12 +8,13 @@ Supported cache solutions
 
 Currently this module supports the following cache methods.
 
-1. APC
+1. APCu
 2. Memcache
 3. Memcached-tags (Supports tags)
 4. SQLite (Supports tags)
 5. File
 6. Wincache
+7. APC (**deprecated**: the APC extension is not available on PHP 7 or later, use APCu instead)
 
 Planned support
 ---------------
@@ -27,7 +28,7 @@ Introduction to caching
 
 To use caching to the maximum potential, your application should be designed with caching in mind from the outset. In general, the most effective caches contain lots of small collections of data that are the result of expensive computational operations, such as searching through a large data set.
 
-There are many different caching methods available for PHP, from the very basic file based caching to opcode caching in eAccelerator and APC. Caching engines that use physical memory over disk based storage are always faster, however many do not support more advanced features such as tagging.
+There are many different caching methods available for PHP, from the very basic file based caching to in-memory caching with APCu. Caching engines that use physical memory over disk based storage are always faster, however many do not support more advanced features such as tagging.
 
 Using Cache
 -----------
